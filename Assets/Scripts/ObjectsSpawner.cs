@@ -11,14 +11,16 @@ public class ObjectsSpawner : MonoBehaviour
     private float timeLeft;
     public Vector2 timeToSpawnObjects;
     public GameObject parentGround;
+    private States.CharacterState _states;
     void Start()
     {
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        Timer();
+ 
     }
 
     void Spawn()
@@ -29,7 +31,7 @@ public class ObjectsSpawner : MonoBehaviour
         spawn.transform.parent = parentGround.transform;
     }
 
-    void Timer()
+   public void SpawnObjects()
     {
         timeLeft -= Time.deltaTime;
         if ( timeLeft <= 0 )
