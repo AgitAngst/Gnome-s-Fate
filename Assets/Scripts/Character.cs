@@ -21,6 +21,7 @@ public class Character : MonoBehaviour
     private ObjectsSpawner _objectsSpawner;
     public GameObject SpawnPoints;
     private float positionSum;
+    private float animatorBlendValue;
     void Start()
     {
         _states = States.CharacterState.Idle;
@@ -64,7 +65,12 @@ public class Character : MonoBehaviour
             {
                 positionSum = -3f;
             }
-            transform.DOMove(new Vector3(positionSum ,0 , 0) , 1f);
+            animator.SetFloat("RunDirection", animatorBlendValue);
+            Tween myTween = DOTween.To(() => animatorBlendValue, x => animatorBlendValue = x, 1f, 0.5f);
+
+            transform.DOMove(new Vector3(positionSum ,0 , 0) , 1f)
+                .SetAs(myTween)
+                .OnComplete(ResetBlend);
         }
 
         if (Input.GetKeyDown(KeyCode.D))
@@ -75,6 +81,7 @@ public class Character : MonoBehaviour
                 positionSum = 3f;
             }
             transform.DOMove(new Vector3(positionSum ,0 , 0) , 1f);
+            DOTween.To(() => animatorBlendValue, x => animatorBlendValue = x, 0f, 0.5f).OnComplete(ResetBlend);
         }
         // if (Input.GetKey(KeyCode.D) && transform.position.x < 3)
         // {
@@ -131,5 +138,10 @@ public class Character : MonoBehaviour
         }
        
         
+    }
+
+    void ResetBlend()
+    {
+        animatorBlendValue = 0.5f;
     }
 }
