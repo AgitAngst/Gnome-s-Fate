@@ -22,6 +22,7 @@ public class Character : MonoBehaviour
     public GameObject SpawnPoints;
     private float positionSum;
     private float animatorBlendValue;
+    private bool isDead = false;
     void Start()
     {
         _states = States.CharacterState.Idle;
@@ -46,14 +47,18 @@ public class Character : MonoBehaviour
                 _objectsSpawner.SpawnObjects();
                 break;
             case States.CharacterState.Dead:
-                Death();
+                if (!isDead)
+                {
+                    Death();
+                }
                 break;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        throw new NotImplementedException();
+        _states = States.CharacterState.Dead;
+
     }
 
     private void CharacterControl()
@@ -114,6 +119,9 @@ public class Character : MonoBehaviour
     }
     public void Death()
     {
+        characterSpeed = 0f;
+        _ground.degreesPerSecond = characterSpeed;
+        isDead = true;
         animator.SetTrigger("Die");
     }
 
