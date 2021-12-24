@@ -10,8 +10,14 @@ public class ObjectsSpawner : MonoBehaviour
     public GameObject[] spawnPoints;
     private float timeLeft;
     public Vector2 timeToSpawnObjects;
+    public bool randomRotation;
+    public Vector2 rotationDegrees;
+
     public GameObject parentGround;
     private States.CharacterState _states;
+    public bool randomMaterials = false;
+    public Material[] materials;
+    private GameObject spawn;
     void Start()
     {
         
@@ -20,18 +26,43 @@ public class ObjectsSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
- 
+        switch (_states)
+        {
+            case States.CharacterState.Idle:
+                break;
+            case States.CharacterState.Running:
+                Debug.Log("work");
+                SpawnObjects();
+                break;
+            case States.CharacterState.Dead:
+                break;
+        }
+        SpawnObjects();
     }
 
     void Spawn()
     {
         var spawnPoint = Random.Range(0, spawnPoints.Length);
-        var spawn = Instantiate(objects[Random.Range(0, objects.Length)],spawnPoints[spawnPoint].transform.position ,
-            Quaternion.Euler(90, 0, 0));
+        if (randomRotation)
+        {
+            spawn = Instantiate(objects[Random.Range(0, objects.Length)],spawnPoints[spawnPoint].transform.position ,
+                Quaternion.Euler(90, 0, Random.Range(rotationDegrees.x,rotationDegrees.y)));
+        }
+        else
+        {
+            spawn = Instantiate(objects[Random.Range(0, objects.Length)],spawnPoints[spawnPoint].transform.position ,
+                Quaternion.Euler(90, 0, 0));
+        }
+        
         spawn.transform.parent = parentGround.transform;
+        
+        if (randomMaterials)
+        {
+            spawn.GetComponent<Renderer>().material = materials[Random.Range(0, materials.Length)];
+        }
     }
 
-   public void SpawnObjects()
+   void SpawnObjects()
     {
         timeLeft -= Time.deltaTime;
         if ( timeLeft <= 0 )

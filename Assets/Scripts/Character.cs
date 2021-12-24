@@ -19,7 +19,6 @@ public class Character : MonoBehaviour
     private float tmpSpeed;
     public float keyPressTimer = 0.5f;
     private ObjectsSpawner _objectsSpawner;
-    public GameObject SpawnPoints;
     private float positionSum;
     private float animatorBlendValue;
     private bool isDead = false;
@@ -34,7 +33,6 @@ public class Character : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         tmpSpeed = characterSpeed;
         _ground = groundObject.GetComponent<Ground>();
-        _objectsSpawner = SpawnPoints.GetComponent<ObjectsSpawner>();
         positionSum = 0f;
     }
 
@@ -49,7 +47,6 @@ public class Character : MonoBehaviour
                 break;
             case States.CharacterState.Running:
                 Run();
-                _objectsSpawner.SpawnObjects();
                 break;
             case States.CharacterState.Dead:
                 if (!isDead)
