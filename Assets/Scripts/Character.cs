@@ -23,6 +23,11 @@ public class Character : MonoBehaviour
     private float positionSum;
     private float animatorBlendValue;
     private bool isDead = false;
+
+    private float test1;
+    private float lerpTimeElapsed;
+    public float lerpDuration = 0.5f;
+
     void Start()
     {
         _states = States.CharacterState.Idle;
@@ -70,12 +75,18 @@ public class Character : MonoBehaviour
             {
                 positionSum = -3f;
             }
-            animator.SetFloat("RunDirection", animatorBlendValue);
-            Tween myTween = DOTween.To(() => animatorBlendValue, x => animatorBlendValue = x, 1f, 0.5f);
 
-            transform.DOMove(new Vector3(positionSum ,0 , 0) , 1f)
-                .SetAs(myTween)
-                .OnComplete(ResetBlend);
+            transform.DOMove(new Vector3(positionSum, 0, 0), 1f);
+
+            // if (lerpTimeElapsed < lerpDuration)
+            // {
+            //     animator.SetFloat("RunDirection", Mathf.Lerp(0f, -1f, lerpTimeElapsed / lerpDuration));
+            //     lerpTimeElapsed += Time.deltaTime;
+            // }
+
+            StartCoroutine("AnimatorLerp");
+
+            //animator.SetFloat("RunDirection", -1f);
         }
 
         if (Input.GetKeyDown(KeyCode.D))
@@ -86,7 +97,8 @@ public class Character : MonoBehaviour
                 positionSum = 3f;
             }
             transform.DOMove(new Vector3(positionSum ,0 , 0) , 1f);
-            DOTween.To(() => animatorBlendValue, x => animatorBlendValue = x, 0f, 0.5f).OnComplete(ResetBlend);
+            animator.SetFloat("RunDirection", 1f);
+
         }
         // if (Input.GetKey(KeyCode.D) && transform.position.x < 3)
         // {
@@ -104,7 +116,17 @@ public class Character : MonoBehaviour
             _states = States.CharacterState.Running;
         }
     }
-    
+
+   private IEnumerator AnimatorLerp()
+    {
+        test1 = animator.GetFloat("RunDirection");
+      //  DOTween.To(() => test1, x => test1 = x, -1f, .5f);
+      DOTween.To(() => test1, x => test1 = x, -1f, .5f);
+  
+      animator.SetFloat("RunDirection",test1);
+        Debug.Log("spam");
+        yield return null;
+    }
 
     public void Attack()
     {
