@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 public class Character : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class Character : MonoBehaviour
     private float lerpTimeElapsed;
     public float lerpDuration = 0.5f;
 
-    public UIUpdater uiUpdater;
+    public CharacterEvents characterEvents;
     void Start()
     {
         _states = States.CharacterState.Idle;
@@ -108,12 +109,11 @@ public class Character : MonoBehaviour
         {
             animator.SetTrigger("Attack");
             Attack();
-            uiUpdater.CashUpdate(100);
+            characterEvents.CashUpdate(100);
         }
         if (Input.GetKey(KeyCode.Space))
         {
             _states = States.CharacterState.Running;
-            uiUpdater.StepTextUpdate(1000);
         }
     }
 

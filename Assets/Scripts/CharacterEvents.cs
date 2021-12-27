@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public class UIUpdater : MonoBehaviour
+public class CharacterEvents : MonoBehaviour
 {
-    public int HPCount = 3;
     public TextMeshProUGUI textSteps;
     public TextMeshProUGUI textCash;
     private int stepsCount = 0;
@@ -13,7 +12,7 @@ public class UIUpdater : MonoBehaviour
 
     void Start()
     {
-        StepTextUpdate(0);
+        StepUpdate(0);
         CashUpdate(0);
     }
 
@@ -22,7 +21,11 @@ public class UIUpdater : MonoBehaviour
         
     }
 
-    public int StepTextUpdate(int count)
+    public void Step()
+    {
+        StepUpdate(1);
+    }
+    public int StepUpdate(int count)
     {
         stepsCount += count;
         textSteps.text = stepsCount.ToString();
