@@ -8186,6 +8186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1888142111}
+  - component: {fileID: 1888142112}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -8208,6 +8209,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1888142112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888142110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4ecca4b3e90b3b45981819ccaf8e3d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPCount: 3
+  textSteps: {fileID: 899350314}
+  textCash: {fileID: 1187304891}
 --- !u!1 &1888611024 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5245336732183698881, guid: b54255a1692175641985f340398c1b3d, type: 3}
@@ -8960,6 +8976,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 2.28
       objectReference: {fileID: 0}
+    - target: {fileID: 5185340024031245220, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
+      propertyPath: uiUpdater
+      value: 
+      objectReference: {fileID: 1888142112}
     - target: {fileID: 5185340024031245220, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
       propertyPath: SpawnPoints
       value: 

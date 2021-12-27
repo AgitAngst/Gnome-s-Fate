@@ -27,6 +27,7 @@ public class Character : MonoBehaviour
     private float lerpTimeElapsed;
     public float lerpDuration = 0.5f;
 
+    public UIUpdater uiUpdater;
     void Start()
     {
         _states = States.CharacterState.Idle;
@@ -107,10 +108,12 @@ public class Character : MonoBehaviour
         {
             animator.SetTrigger("Attack");
             Attack();
+            uiUpdater.CashUpdate(100);
         }
         if (Input.GetKey(KeyCode.Space))
         {
             _states = States.CharacterState.Running;
+            uiUpdater.StepTextUpdate(1000);
         }
     }
 
