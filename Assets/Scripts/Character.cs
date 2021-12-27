@@ -103,7 +103,7 @@ public class Character : MonoBehaviour
         //     xPosition = xPosition += 3;
         //     transform.position = new Vector3(xPosition, 0, 0);
         // }
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             animator.SetTrigger("Attack");
             Attack();
