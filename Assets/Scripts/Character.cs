@@ -154,9 +154,13 @@ public class Character : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHP -= damage;
-        animator.SetTrigger("Hurt");
         playerHP.text = currentHP.ToString();
-        if (currentHP <= 0)
+        if (currentHP >= 1)
+        {
+            animator.SetTrigger("Hurt");
+
+        }
+        else
         {
             _states = States.CharacterState.Dead;
             Death();
