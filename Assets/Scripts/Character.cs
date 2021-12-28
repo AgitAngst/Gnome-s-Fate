@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG;
 using DG.Tweening;
+using TMPro;
 using UnityEngine.Serialization;
 
 public class Character : MonoBehaviour
@@ -35,6 +36,9 @@ public class Character : MonoBehaviour
     public LayerMask layerMask;
 
     public int attackDamage;
+    public int  maxHP;
+    public TextMeshProUGUI playerHP;
+    private int currentHP;
     void Start()
     {
         _states = States.CharacterState.Idle;
@@ -42,6 +46,9 @@ public class Character : MonoBehaviour
         tmpSpeed = characterSpeed;
         _ground = groundObject.GetComponent<Ground>();
         positionSum = 0f;
+        currentHP = maxHP;
+        playerHP.text = currentHP.ToString();
+
     }
 
     void Update()
@@ -57,18 +64,13 @@ public class Character : MonoBehaviour
                 Run();
                 break;
             case States.CharacterState.Dead:
-                if (!isDead)
-                {
-                    Death();
-                }
                 break;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        _states = States.CharacterState.Dead;
-
+        TakeDamage(1);
     }
 
     private void CharacterControl()
@@ -149,6 +151,17 @@ public class Character : MonoBehaviour
         _ground.degreesPerSecond = characterSpeed;
 
     }
+    public void TakeDamage(int damage)
+    {
+        currentHP -= damage;
+        animator.SetTrigger("Hurt");
+        playerHP.text = currentHP.ToString();
+        if (currentHP <= 0)
+        {
+            _states = States.CharacterState.Dead;
+            Death();
+        }
+    }
     public void Death()
     {
         characterSpeed = 0f;
@@ -165,6 +178,7 @@ public class Character : MonoBehaviour
         _ground.degreesPerSecond = characterSpeed;
     }
 
+    
     void KeyPressTimer()
     {
         if (keyPressed)
