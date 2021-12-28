@@ -7899,17 +7899,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187304889}
   m_CullTransparentMesh: 1
---- !u!114 &1273643483 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1273643483, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
-  m_PrefabInstance: {fileID: 5185340023832937426}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4ecca4b3e90b3b45981819ccaf8e3d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1281694520
 GameObject:
   m_ObjectHideFlags: 0
@@ -8774,17 +8763,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 899350314}
     - target: {fileID: 5185340024031245220, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
-      propertyPath: uiUpdater
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5185340024031245220, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
       propertyPath: groundObject
       value: 
       objectReference: {fileID: 919132148809346864}
-    - target: {fileID: 5185340024031245220, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
-      propertyPath: characterEvents
-      value: 
-      objectReference: {fileID: 1273643483}
     - target: {fileID: 5185340024031245221, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
       propertyPath: m_RootOrder
       value: 3

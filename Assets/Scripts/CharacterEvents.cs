@@ -9,11 +9,13 @@ public class CharacterEvents : MonoBehaviour
     public TextMeshProUGUI textCash;
     private int stepsCount = 0;
     private int cashCount = 0;
+    private Character character;
 
     void Start()
     {
         StepUpdate(0);
         CashUpdate(0);
+        character = GetComponentInParent<Character>();
     }
 
     void Update()
@@ -24,6 +26,11 @@ public class CharacterEvents : MonoBehaviour
     public void Step()
     {
         StepUpdate(1);
+    }
+
+    public void Damage()
+    {
+        character.Attack();
     }
     public int StepUpdate(int count)
     {

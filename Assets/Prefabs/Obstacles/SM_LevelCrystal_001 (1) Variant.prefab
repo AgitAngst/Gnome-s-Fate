@@ -15,9 +15,17 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 2977.7356
       objectReference: {fileID: 0}
+    - target: {fileID: 3980233135943653054, guid: 759bbf5bc7a3b144082e491fdf9aceb2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4673632562143307589, guid: 759bbf5bc7a3b144082e491fdf9aceb2, type: 3}
       propertyPath: m_Name
       value: SM_LevelCrystal_001 (1) Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673632562143307589, guid: 759bbf5bc7a3b144082e491fdf9aceb2, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5447038471169408511, guid: 759bbf5bc7a3b144082e491fdf9aceb2, type: 3}
       propertyPath: m_RootOrder

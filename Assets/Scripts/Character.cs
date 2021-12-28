@@ -29,6 +29,12 @@ public class Character : MonoBehaviour
     public float lerpDuration = 0.5f;
 
     public CharacterEvents characterEvents;
+
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask layerMask;
+
+    public int attackDamage;
     void Start()
     {
         _states = States.CharacterState.Idle;
@@ -108,8 +114,7 @@ public class Character : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             animator.SetTrigger("Attack");
-            Attack();
-            characterEvents.CashUpdate(100);
+            //attack is an event in attack animation
         }
         if (Input.GetKey(KeyCode.Space))
         {
@@ -130,7 +135,12 @@ public class Character : MonoBehaviour
 
     public void Attack()
     {
-        
+        Collider[] hitenemies = Physics.OverlapSphere(attackPoint.transform.position, attackRange, layerMask);
+        foreach (Collider enemy in hitenemies)
+        {
+            Debug.Log("enemy" + enemy.name);
+            enemy.GetComponent<ObstacleHP>().Damage(attackDamage);
+        }
     }
 
     public void Idle()
@@ -173,5 +183,14 @@ public class Character : MonoBehaviour
     void ResetBlend()
     {
         animatorBlendValue = 0.5f;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+        {
+            return;
+        }
+        Gizmos.DrawWireSphere(attackPoint.transform.position,attackRange);
     }
 }
