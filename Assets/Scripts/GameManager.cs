@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour
     public float currentGameSpeed = 1f;
     public float speedMultiplyer;
     public Character character;
+    public KeyCode restartKey = KeyCode.R;
+    public KeyCode strafeLeftKey = KeyCode.A;
+    public KeyCode strafeRightKey = KeyCode.D;
+    public KeyCode startRunKey = KeyCode.Space;
+    public KeyCode attackKey = KeyCode.Mouse0;
 
     private void Awake()
     {
@@ -27,6 +32,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -37,6 +43,12 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (character.isDead && Input.GetKeyDown(restartKey))
+        {
+#pragma warning disable CS0618
+            Application.LoadLevel(Application.loadedLevel);
+#pragma warning restore CS0618
+        }
     }
 
     public void ChangeSpeed(float speedMultiply)

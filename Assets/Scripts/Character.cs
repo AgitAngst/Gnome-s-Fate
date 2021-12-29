@@ -25,7 +25,7 @@ public class Character : MonoBehaviour
     private ObjectsSpawner objectsSpawner;
     private float positionSum;
     private float animatorBlendValue;
-    private bool isDead = false;
+    public bool isDead = false;
 
     private float test1;
     private float lerpTimeElapsed;
@@ -38,7 +38,7 @@ public class Character : MonoBehaviour
 
 
     public CharacterEvents characterEvents;
-
+    private GameManager gameManager;
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask layerMask;
@@ -59,6 +59,7 @@ public class Character : MonoBehaviour
         positionSum = 0f;
         currentHp = maxHp;
         playerHp.text = currentHp.ToString();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update()
@@ -88,7 +89,7 @@ public class Character : MonoBehaviour
     {
         if (!isDead)
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(gameManager.strafeLeftKey))
             {
                 positionSum -= 3f;
                 if (positionSum <= -3f)
@@ -100,7 +101,7 @@ public class Character : MonoBehaviour
                 AnimatorLerp(-1);
             }
 
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(gameManager.strafeRightKey))
             {
                 positionSum += 3f;
                 if (positionSum >= 3f)
@@ -118,13 +119,13 @@ public class Character : MonoBehaviour
             //     xPosition = xPosition += 3;
             //     transform.position = new Vector3(xPosition, 0, 0);
             // }
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(gameManager.attackKey))
             {
                 animator.SetTrigger(Attack1);
                 //attack is an event in attack animation
             }
 
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(gameManager.startRunKey))
             {
                 states = States.CharacterState.Running;
                 characterSpeed = tmpSpeed;
