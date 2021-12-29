@@ -132,7 +132,6 @@ public class Character : MonoBehaviour
         tweener?.Kill();
         blendDirectionValue = animator.GetFloat(RunDirection);
         tweener = DOTween.To(() => blendDirectionValue, x => blendDirectionValue = x, direction, duration)
-            .SetEase(Ease.InOutBounce)
             .OnUpdate(() => { animator.SetFloat(RunDirection, blendDirectionValue); })
             .OnComplete(() =>
             {
