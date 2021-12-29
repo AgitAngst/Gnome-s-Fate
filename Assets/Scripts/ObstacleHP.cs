@@ -2,26 +2,29 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class ObstacleHP : MonoBehaviour
+public class ObstacleHp : MonoBehaviour
 {
-    public int maxHP = 1;
+    [FormerlySerializedAs("maxHP")] public int maxHp = 1;
 
-    private int currentHP ;
+    private int currentHp;
     public Character character;
-
+    private GameManager gameManager;
 
     private void Start()
     {
-        currentHP = maxHP;
+        currentHp = maxHp;
         character = GameObject.FindWithTag("Player").GetComponent<Character>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     public void Damage(int damage)
     {
-        currentHP -= damage;
-        if (currentHP <= 0)
+        currentHp -= damage;
+        if (currentHp <= 0)
         {
+            gameManager.ChangeSpeed(0.12f);
             Die();
         }
     }

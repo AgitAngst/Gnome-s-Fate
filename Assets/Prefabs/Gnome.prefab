@@ -298,7 +298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitBeforeChangeSide: 0.5
   characterSpeed: 20
-  _states: 0
+  states: 0
   groundObject: {fileID: 0}
   keyPressTimer: 0.5
   lerpDuration: 0.5
@@ -309,6 +309,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   attackDamage: 1
+  maxHp: 3
+  playerHp: {fileID: 0}
 --- !u!136 &5185340024031245226
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -386,6 +388,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 449a742b9cf66a94f9aec0a83acb0492, type: 2}
+    - target: {fileID: 5866666021909216657, guid: cca444aafdf77fc47812f7a09956ec0a, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cca444aafdf77fc47812f7a09956ec0a, type: 3}
 --- !u!4 &407636351062778298 stripped

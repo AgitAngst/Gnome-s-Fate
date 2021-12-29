@@ -14,7 +14,7 @@ public class ObjectsSpawner : MonoBehaviour
     public Vector2 rotationDegrees;
 
     public GameObject parentGround;
-    private States.CharacterState _states;
+    private States.CharacterState states;
     public bool randomMaterials = false;
     public Material[] materials;
     private GameObject spawn;
@@ -26,7 +26,7 @@ public class ObjectsSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (_states)
+        switch (states)
         {
             case States.CharacterState.Idle:
                 break;

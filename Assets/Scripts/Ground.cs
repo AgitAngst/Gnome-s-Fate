@@ -7,6 +7,7 @@ public class Ground : MonoBehaviour
 
 {
     [HideInInspector]public float degreesPerSecond;
+    
     private void Start()
     {
 

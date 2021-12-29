@@ -124,6 +124,7 @@ public class Character : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             states = States.CharacterState.Running;
+            characterSpeed = tmpSpeed;
         }
     }
 
@@ -145,7 +146,7 @@ public class Character : MonoBehaviour
         foreach (Collider enemy in hitenemies)
         {
             Debug.Log("enemy" + enemy.name);
-            enemy.GetComponent<ObstacleHP>().Damage(attackDamage);
+            enemy.GetComponent<ObstacleHp>().Damage(attackDamage);
         }
     }
 
@@ -181,8 +182,7 @@ public class Character : MonoBehaviour
     public void Run()
     {
         animator.SetBool(IsRunning, true);
-        characterSpeed = tmpSpeed;
-
+        //characterSpeed = tmpSpeed;
         ground.degreesPerSecond = characterSpeed;
     }
 
