@@ -9,6 +9,7 @@ public class ObstacleHp : MonoBehaviour
     [FormerlySerializedAs("maxHP")] public int maxHp = 1;
 
     private int currentHp;
+    public float scorePerObject;
     public Character character;
     private GameManager gameManager;
 
@@ -31,7 +32,8 @@ public class ObstacleHp : MonoBehaviour
 
     void Die()
     {
-        character.characterEvents.CashUpdate(10);
+        var score = scorePerObject * gameManager.speedMultiplyer;
+        character.characterEvents.CashUpdate(Mathf.RoundToInt(score));
         Destroy(gameObject);
     }
 }

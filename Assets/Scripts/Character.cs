@@ -74,6 +74,7 @@ public class Character : MonoBehaviour
                 Run();
                 break;
             case States.CharacterState.Dead:
+                isDead = true;
                 break;
         }
     }
@@ -85,46 +86,49 @@ public class Character : MonoBehaviour
 
     private void CharacterControl()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (!isDead)
         {
-            positionSum -= 3f;
-            if (positionSum <= -3f)
+            if (Input.GetKeyDown(KeyCode.A))
             {
-                positionSum = -3f;
+                positionSum -= 3f;
+                if (positionSum <= -3f)
+                {
+                    positionSum = -3f;
+                }
+
+                transform.DOMove(new Vector3(positionSum, 0, 0), 1f);
+                AnimatorLerp(-1);
             }
 
-            transform.DOMove(new Vector3(positionSum, 0, 0), 1f);
-            AnimatorLerp(-1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            positionSum += 3f;
-            if (positionSum >= 3f)
+            if (Input.GetKeyDown(KeyCode.D))
             {
-                positionSum = 3f;
+                positionSum += 3f;
+                if (positionSum >= 3f)
+                {
+                    positionSum = 3f;
+                }
+
+                transform.DOMove(new Vector3(positionSum, 0, 0), 1f);
+                AnimatorLerp(1);
             }
 
-            transform.DOMove(new Vector3(positionSum, 0, 0), 1f);
-            AnimatorLerp(1);
-        }
+            // if (Input.GetKey(KeyCode.D) && transform.position.x < 3)
+            // {
+            //     xPosition = transform.position.x;
+            //     xPosition = xPosition += 3;
+            //     transform.position = new Vector3(xPosition, 0, 0);
+            // }
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                animator.SetTrigger(Attack1);
+                //attack is an event in attack animation
+            }
 
-        // if (Input.GetKey(KeyCode.D) && transform.position.x < 3)
-        // {
-        //     xPosition = transform.position.x;
-        //     xPosition = xPosition += 3;
-        //     transform.position = new Vector3(xPosition, 0, 0);
-        // }
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            animator.SetTrigger(Attack1);
-            //attack is an event in attack animation
-        }
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            states = States.CharacterState.Running;
-            characterSpeed = tmpSpeed;
+            if (Input.GetKey(KeyCode.Space))
+            {
+                states = States.CharacterState.Running;
+                characterSpeed = tmpSpeed;
+            }
         }
     }
 

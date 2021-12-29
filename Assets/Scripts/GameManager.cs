@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public float minGameSpeed = 1f;
     public float maxGameSpeed = 3f;
     public float currentGameSpeed = 1f;
+    public float speedMultiplyer;
     public Character character;
 
     private void Awake()
@@ -40,8 +41,9 @@ public class GameManager : MonoBehaviour
 
     public void ChangeSpeed(float speedMultiply)
     {
-        if (currentGameSpeed < maxGameSpeed || speedMultiply < maxGameSpeed)
+        if (currentGameSpeed < maxGameSpeed || speedMultiplyer < maxGameSpeed)
         {
+            speedMultiplyer += speedMultiply;
             currentGameSpeed += speedMultiply;
             character.characterSpeed += currentGameSpeed;
         }
