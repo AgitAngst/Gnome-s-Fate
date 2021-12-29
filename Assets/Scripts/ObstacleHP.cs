@@ -32,7 +32,7 @@ public class ObstacleHp : MonoBehaviour
 
     void Die()
     {
-        var score = scorePerObject * gameManager.speedMultiplyer;
+        var score = scorePerObject * gameManager.scoreMultiplyer;
         character.characterEvents.CashUpdate(Mathf.RoundToInt(score));
         Destroy(gameObject);
     }

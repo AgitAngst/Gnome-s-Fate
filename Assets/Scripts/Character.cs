@@ -112,23 +112,21 @@ public class Character : MonoBehaviour
                 transform.DOMove(new Vector3(positionSum, 0, 0), 1f);
                 AnimatorLerp(1);
             }
-
-            // if (Input.GetKey(KeyCode.D) && transform.position.x < 3)
-            // {
-            //     xPosition = transform.position.x;
-            //     xPosition = xPosition += 3;
-            //     transform.position = new Vector3(xPosition, 0, 0);
-            // }
+            
             if (Input.GetKeyDown(gameManager.attackKey))
             {
                 animator.SetTrigger(Attack1);
                 //attack is an event in attack animation
             }
 
-            if (Input.GetKey(gameManager.startRunKey))
+            if (Input.GetKeyDown(gameManager.startRunKey))
             {
-                states = States.CharacterState.Running;
-                characterSpeed = tmpSpeed;
+                if (states == States.CharacterState.Idle)
+                {
+                    states = States.CharacterState.Running;
+
+                    characterSpeed = tmpSpeed += gameManager.scoreMultiplyer;
+                }
             }
         }
     }

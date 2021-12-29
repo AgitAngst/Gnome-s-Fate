@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class GameManager : MonoBehaviour
     public float minGameSpeed = 1f;
     public float maxGameSpeed = 3f;
     public float currentGameSpeed = 1f;
-    public float speedMultiplyer;
+    [FormerlySerializedAs("speedAndScoreMultiplyer")] [FormerlySerializedAs("speedMultiplyer")] public float scoreMultiplyer;
     public Character character;
     public KeyCode restartKey = KeyCode.R;
     public KeyCode strafeLeftKey = KeyCode.A;
@@ -33,7 +34,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(gameObject);
     }
 
     private void InitializeManager()
@@ -51,12 +51,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ChangeSpeed(float speedMultiply)
+    public void ChangeSpeed(float speedAdd)
     {
-        if (currentGameSpeed < maxGameSpeed || speedMultiplyer < maxGameSpeed)
+        if (currentGameSpeed < maxGameSpeed || scoreMultiplyer < maxGameSpeed)
         {
-            speedMultiplyer += speedMultiply;
-            currentGameSpeed += speedMultiply;
+            scoreMultiplyer += speedAdd;
+            currentGameSpeed += speedAdd;
             character.characterSpeed += currentGameSpeed;
         }
         else

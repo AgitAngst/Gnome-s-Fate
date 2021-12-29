@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17980957, g: 0.17980957, b: 0.17980957, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3671,6 +3671,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2143611526}
   - component: {fileID: 2143611525}
+  - component: {fileID: 2143611527}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -3693,8 +3694,13 @@ MonoBehaviour:
   minGameSpeed: 1
   maxGameSpeed: 3
   currentGameSpeed: 1
-  speedMultiplyer: 0
+  scoreMultiplyer: 2
   character: {fileID: 5185340023832937427}
+  restartKey: 114
+  strafeLeftKey: 97
+  strafeRightKey: 100
+  startRunKey: 32
+  attackKey: 323
 --- !u!4 &2143611526
 Transform:
   m_ObjectHideFlags: 0
@@ -3710,6 +3716,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2143611527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143611524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8fe9c40757a7b04eba253f954d90e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &919132148809346864 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6565233994680322479, guid: e8d53d2e8af549b4b9afffb73bf2474f, type: 3}
