@@ -61,7 +61,7 @@ public class ObjectsSpawner : MonoBehaviour
             {
                 epicSpawn = Instantiate(epicObjects[Random.Range(0, epicObjects.Length)],
                     spawnPoints[spawnPoint].transform.position,
-                    Quaternion.Euler(90, 0, Random.Range(rotationDegrees.x, rotationDegrees.y)));
+                    Quaternion.Euler(180, 180, Random.Range(rotationDegrees.x, rotationDegrees.y)));
             }
         }
         else
@@ -73,7 +73,7 @@ public class ObjectsSpawner : MonoBehaviour
             {
                 epicSpawn = Instantiate(epicObjects[Random.Range(0, epicObjects.Length)],
                     spawnPoints[spawnPoint].transform.position,
-                    Quaternion.Euler(90, 0, 0));
+                    Quaternion.Euler(180, 180, 0));
             }
         }
 
