@@ -17,7 +17,12 @@ public class GameManager : MonoBehaviour
     public KeyCode strafeRightKey = KeyCode.D;
     public KeyCode startRunKey = KeyCode.Space;
     public KeyCode attackKey = KeyCode.Mouse0;
+    public KeyCode cameraChangeKey = KeyCode.V;
 
+    public Camera cameraBack;
+    public Camera cameraFront;
+
+    [HideInInspector]public bool isCameraChanged = false;
     private void Awake()
     {
         InitializeManager();
@@ -35,7 +40,24 @@ public class GameManager : MonoBehaviour
         }
 
     }
-
+    
+    public void ChangeCamera()
+    {
+        if (Input.GetKeyDown(cameraChangeKey))
+        {
+            isCameraChanged =! isCameraChanged;
+            if (!isCameraChanged)
+            {
+                cameraBack.enabled = true;
+                cameraFront.enabled = false;
+            }
+            else
+            {
+                cameraBack.enabled = false;
+                cameraFront.enabled = true;
+            }
+        }
+    }
     private void InitializeManager()
     {
         currentGameSpeed = minGameSpeed;
@@ -49,6 +71,8 @@ public class GameManager : MonoBehaviour
             Application.LoadLevel(Application.loadedLevel);
 #pragma warning restore CS0618
         }
+        
+        ChangeCamera();
     }
 
     public void ChangeSpeed(float speedAdd)

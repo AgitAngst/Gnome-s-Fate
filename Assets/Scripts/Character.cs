@@ -89,6 +89,31 @@ public class Character : MonoBehaviour
     {
         if (!isDead)
         {
+            ChangeMovementDependentOnCamera();
+            
+            if (Input.GetKeyDown(gameManager.attackKey))
+            {
+                animator.SetTrigger(Attack1);
+                //attack is an event in attack animation
+            }
+
+            if (Input.GetKeyDown(gameManager.startRunKey))
+            {
+                if (states == States.CharacterState.Idle)
+                {
+                    states = States.CharacterState.Running;
+
+                    characterSpeed = tmpSpeed += gameManager.scoreMultiplyer;
+                }
+            }
+        }
+    }
+
+
+    private void ChangeMovementDependentOnCamera()
+    {
+        if (!gameManager.isCameraChanged)
+        {
             if (Input.GetKeyDown(gameManager.strafeLeftKey))
             {
                 positionSum -= 3f;
@@ -112,25 +137,35 @@ public class Character : MonoBehaviour
                 transform.DOMove(new Vector3(positionSum, 0, 0), 1f);
                 AnimatorLerp(1);
             }
-            
-            if (Input.GetKeyDown(gameManager.attackKey))
+        }
+        else
+        {
+            if (Input.GetKeyDown(gameManager.strafeRightKey))
             {
-                animator.SetTrigger(Attack1);
-                //attack is an event in attack animation
+                positionSum -= 3f;
+                if (positionSum <= -3f)
+                {
+                    positionSum = -3f;
+                }
+
+                transform.DOMove(new Vector3(positionSum, 0, 0), 1f);
+                AnimatorLerp(-1);
             }
 
-            if (Input.GetKeyDown(gameManager.startRunKey))
+            if (Input.GetKeyDown(gameManager.strafeLeftKey))
             {
-                if (states == States.CharacterState.Idle)
+                positionSum += 3f;
+                if (positionSum >= 3f)
                 {
-                    states = States.CharacterState.Running;
-
-                    characterSpeed = tmpSpeed += gameManager.scoreMultiplyer;
+                    positionSum = 3f;
                 }
+
+                transform.DOMove(new Vector3(positionSum, 0, 0), 1f);
+                AnimatorLerp(1);
             }
         }
-    }
 
+    }
     private void AnimatorLerp(float direction, float duration = 0.5f)
     {
         tweener?.Kill();
