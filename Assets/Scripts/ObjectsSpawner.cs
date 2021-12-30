@@ -7,6 +7,11 @@ using Random = UnityEngine.Random;
 public class ObjectsSpawner : MonoBehaviour
 {
     public GameObject[] objects;
+    public bool enableEpicObjects = false;
+
+    [Range(0, 1)] public float epicObjectsSpawnRate = 0.1f;
+    private float epicSpawnChance;
+    public GameObject[] epicObjects;
     public GameObject[] spawnPoints;
     private float timeLeft;
     public Vector2 timeToSpawnObjects;
@@ -18,9 +23,10 @@ public class ObjectsSpawner : MonoBehaviour
     public bool randomMaterials = false;
     public Material[] materials;
     private GameObject spawn;
+    private GameObject epicSpawn;
+
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -37,35 +43,57 @@ public class ObjectsSpawner : MonoBehaviour
             case States.CharacterState.Dead:
                 break;
         }
+
         SpawnObjects();
     }
 
     void Spawn()
     {
+        epicSpawnChance = Random.Range(0f, 1f);
+        Debug.Log(epicSpawnChance);
         var spawnPoint = Random.Range(0, spawnPoints.Length);
         if (randomRotation)
         {
-            spawn = Instantiate(objects[Random.Range(0, objects.Length)],spawnPoints[spawnPoint].transform.position ,
-                Quaternion.Euler(90, 0, Random.Range(rotationDegrees.x,rotationDegrees.y)));
+            spawn = Instantiate(objects[Random.Range(0, objects.Length)], spawnPoints[spawnPoint].transform.position,
+                Quaternion.Euler(90, 0, Random.Range(rotationDegrees.x, rotationDegrees.y)));
+
+            if (enableEpicObjects && epicSpawnChance <= epicObjectsSpawnRate)
+            {
+                epicSpawn = Instantiate(epicObjects[Random.Range(0, epicObjects.Length)],
+                    spawnPoints[spawnPoint].transform.position,
+                    Quaternion.Euler(90, 0, Random.Range(rotationDegrees.x, rotationDegrees.y)));
+            }
         }
         else
         {
-            spawn = Instantiate(objects[Random.Range(0, objects.Length)],spawnPoints[spawnPoint].transform.position ,
+            spawn = Instantiate(objects[Random.Range(0, objects.Length)], spawnPoints[spawnPoint].transform.position,
                 Quaternion.Euler(90, 0, 0));
+
+            if (enableEpicObjects && epicSpawnChance <= epicObjectsSpawnRate)
+            {
+                epicSpawn = Instantiate(epicObjects[Random.Range(0, epicObjects.Length)],
+                    spawnPoints[spawnPoint].transform.position,
+                    Quaternion.Euler(90, 0, 0));
+            }
         }
-        
+
         spawn.transform.parent = parentGround.transform;
-        
+
+        if (enableEpicObjects && epicSpawnChance <= epicObjectsSpawnRate)
+        {
+            epicSpawn.transform.parent = parentGround.transform;
+        }
+
         if (randomMaterials)
         {
             spawn.GetComponent<Renderer>().material = materials[Random.Range(0, materials.Length)];
         }
     }
 
-   void SpawnObjects()
+    void SpawnObjects()
     {
         timeLeft -= Time.deltaTime;
-        if ( timeLeft <= 0 )
+        if (timeLeft <= 0)
         {
             Spawn();
             timeLeft = Random.Range(timeToSpawnObjects.x, timeToSpawnObjects.y);
@@ -76,4 +104,6 @@ public class ObjectsSpawner : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+
+
 }
