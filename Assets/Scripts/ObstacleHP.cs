@@ -16,7 +16,7 @@ public class ObstacleHp : MonoBehaviour
     private void Start()
     {
         currentHp = maxHp;
-        character = GameObject.FindWithTag("Player").GetComponent<Character>();
+        character = FindObjectOfType<Character>();
         gameManager = FindObjectOfType<GameManager>();
     }
 
