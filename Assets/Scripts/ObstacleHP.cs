@@ -10,14 +10,25 @@ public class ObstacleHp : MonoBehaviour
 
     private int currentHp;
     public float scorePerObject;
-    public Character character;
+    private Character character;
     private GameManager gameManager;
+    private Animator animator;
+    private float distance;
+
+    private void Update()
+    {
+        GetDistanceToPlayer();
+    }
 
     private void Start()
     {
         currentHp = maxHp;
         character = FindObjectOfType<Character>();
         gameManager = FindObjectOfType<GameManager>();
+        if (gameObject.GetComponent<Animator>())
+        {
+            animator = gameObject.GetComponent<Animator>();
+        }
     }
 
     public void Damage(int damage)
@@ -30,10 +41,20 @@ public class ObstacleHp : MonoBehaviour
         }
     }
 
-    void Die()
+    private void Die()
     {
         var score = scorePerObject * gameManager.scoreMultiplyer;
         character.characterEvents.CashUpdate(Mathf.RoundToInt(score));
         Destroy(gameObject);
+    }
+
+    private void GetDistanceToPlayer()
+    {
+        distance = Vector3.Distance(character.transform.position, gameObject.transform.position);
+
+        if (distance <= 3f)
+        {
+            animator.SetTrigger("Attack");
+        }
     }
 }

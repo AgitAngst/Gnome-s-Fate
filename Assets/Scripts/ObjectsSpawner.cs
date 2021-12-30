@@ -37,7 +37,6 @@ public class ObjectsSpawner : MonoBehaviour
             case States.CharacterState.Idle:
                 break;
             case States.CharacterState.Running:
-                Debug.Log("work");
                 SpawnObjects();
                 break;
             case States.CharacterState.Dead:
@@ -50,7 +49,6 @@ public class ObjectsSpawner : MonoBehaviour
     void Spawn()
     {
         epicSpawnChance = Random.Range(0f, 1f);
-        Debug.Log(epicSpawnChance);
         var spawnPoint = Random.Range(0, spawnPoints.Length);
         if (randomRotation)
         {
