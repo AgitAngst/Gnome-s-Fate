@@ -14,6 +14,7 @@ public class ObstacleHp : MonoBehaviour
     private GameManager gameManager;
     private Animator animator;
     private float distance;
+    private AudioManager audioManager;
 
     private void Update()
     {
@@ -23,6 +24,7 @@ public class ObstacleHp : MonoBehaviour
     private void Start()
     {
         currentHp = maxHp;
+        audioManager = FindObjectOfType<AudioManager>();
         character = FindObjectOfType<Character>();
         gameManager = FindObjectOfType<GameManager>();
         if (gameObject.GetComponent<Animator>())
@@ -46,6 +48,7 @@ public class ObstacleHp : MonoBehaviour
         var score = scorePerObject * gameManager.scoreMultiplyer;
         character.characterEvents.CashUpdate(Mathf.RoundToInt(score));
         Destroy(gameObject);
+        audioManager.PlaySound(6);
     }
 
     private void GetDistanceToPlayer()

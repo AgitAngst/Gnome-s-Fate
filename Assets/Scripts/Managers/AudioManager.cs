@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DigitalRuby.SoundManagerNamespace;
+using Random = UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
 {
+    public AudioSource music;
+    public AudioClip[] musicClips;
     public AudioSource gnomeStrafe;
     public AudioClip[] gnomeStrafeClips; //0
     public AudioSource gnomePunch;
@@ -15,8 +18,12 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] gnomeDeathClips;//3
     public AudioSource gnomeRunning;
     public AudioClip[] gnomeRunningClip;//4
+    public AudioSource gnomeHurt;
+    public AudioClip[] gnomeHurtClips;//5
+    public AudioSource crystalSmash;
+    public AudioClip[] crystalSmashClips;//6
     public AudioSource clientJump;
-    public AudioClip[] clientJumpClips;//5
+    public AudioClip[] clientJumpClips;//7
 
 
 
@@ -28,6 +35,10 @@ public class AudioManager : MonoBehaviour
     //        // gnomeDeath[index].PlayOneShotSoundManaged(gnomeDeath[index].clip);
     //     }
     // }
+    private void Start()
+    {
+        PlayMusic();
+    }
 
     public void PlaySound(int audioSourceIndex)
     {
@@ -49,9 +60,21 @@ public class AudioManager : MonoBehaviour
                 gnomeRunning.PlayOneShot(gnomeRunningClip[Random.Range(0,gnomeRunningClip.Length)]);
                 break;
             case 5:
+                gnomeHurt.PlayOneShot(gnomeHurtClips[Random.Range(0,gnomeHurtClips.Length)]);
+                break;
+            case 6:
+                crystalSmash.PlayOneShot(crystalSmashClips[Random.Range(0,crystalSmashClips.Length)]);
+                break;
+            case 7:
                 clientJump.PlayOneShot(clientJumpClips[Random.Range(0,clientJumpClips.Length)]);
                 break;
             
         }
+    }
+
+    public void PlayMusic()
+    {
+        music.clip = musicClips[Random.Range(0, musicClips.Length)];
+        music.Play();
     }
 }

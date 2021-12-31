@@ -119,6 +119,8 @@ public class Character : MonoBehaviour
         {
             if (Input.GetKeyDown(gameManager.strafeLeftKey))
             {
+                audioManager.PlaySound(0);
+
                 positionSum -= 3f;
                 if (positionSum <= -3f)
                 {
@@ -131,6 +133,8 @@ public class Character : MonoBehaviour
 
             if (Input.GetKeyDown(gameManager.strafeRightKey))
             {
+                audioManager.PlaySound(0);
+
                 positionSum += 3f;
                 if (positionSum >= 3f)
                 {
@@ -145,6 +149,7 @@ public class Character : MonoBehaviour
         {
             if (Input.GetKeyDown(gameManager.strafeRightKey))
             {
+                audioManager.PlaySound(0);
                 positionSum -= 3f;
                 if (positionSum <= -3f)
                 {
@@ -157,6 +162,7 @@ public class Character : MonoBehaviour
 
             if (Input.GetKeyDown(gameManager.strafeLeftKey))
             {
+                audioManager.PlaySound(0);
                 positionSum += 3f;
                 if (positionSum >= 3f)
                 {
@@ -206,6 +212,7 @@ public class Character : MonoBehaviour
         if (currentHp >= 1)
         {
             animator.SetTrigger(Hurt);
+            audioManager.PlaySound(5);
         }
         else
         {
