@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class CharacterEvents : MonoBehaviour
 {
     public TextMeshProUGUI textSteps;
@@ -10,12 +11,13 @@ public class CharacterEvents : MonoBehaviour
     private int stepsCount = 0;
     private int cashCount = 0;
     private Character character;
-
+    private AudioManager audioManager;
     void Start()
     {
         StepUpdate(0);
         CashUpdate(0);
         character = GetComponentInParent<Character>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
@@ -26,6 +28,7 @@ public class CharacterEvents : MonoBehaviour
     public void Step()
     {
         StepUpdate(1);
+        audioManager.PlaySound(4);
     }
 
     public void Damage()

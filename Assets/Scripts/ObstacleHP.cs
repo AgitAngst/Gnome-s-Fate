@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 public class ObstacleHp : MonoBehaviour
 {
     [FormerlySerializedAs("maxHP")] public int maxHp = 1;
-
+    public bool getDistance = false;
     private int currentHp;
     public float scorePerObject;
     private Character character;
@@ -50,11 +50,15 @@ public class ObstacleHp : MonoBehaviour
 
     private void GetDistanceToPlayer()
     {
-        distance = Vector3.Distance(character.transform.position, gameObject.transform.position);
-
-        if (distance <= 3f)
+        if (getDistance)
         {
-            animator.SetTrigger("Attack");
+            distance = Vector3.Distance(character.transform.position, gameObject.transform.position);
+
+            if (distance <= 3f)
+            {
+                animator.SetTrigger("Attack");
+            }
         }
+       
     }
 }

@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 6619421178378290832}
   - component: {fileID: 3447293666654471795}
   - component: {fileID: 5247777106350882332}
-  - component: {fileID: 8925586843325002387}
+  - component: {fileID: 833698471328415903}
   m_Layer: 6
   m_Name: SM_LevelCrystal_001
   m_TagString: Finish
@@ -333,7 +333,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8925586843325002387
+--- !u!114 &833698471328415903
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -347,4 +347,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 1
   scorePerObject: 3
-  character: {fileID: 0}

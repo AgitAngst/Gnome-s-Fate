@@ -625,8 +625,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 1
+  getDistance: 1
   scorePerObject: 2500
-  character: {fileID: 0}
 --- !u!1 &5169787773542931407
 GameObject:
   m_ObjectHideFlags: 0

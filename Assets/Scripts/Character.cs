@@ -8,6 +8,7 @@ using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
 using TMPro;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class Character : MonoBehaviour
 {
@@ -49,6 +50,7 @@ public class Character : MonoBehaviour
     private int currentHp;
     private float blendDirectionValue;
     private static readonly int Hurt = Animator.StringToHash("Hurt");
+    private AudioManager audioManager;
 
     void Start()
     {
@@ -60,6 +62,7 @@ public class Character : MonoBehaviour
         currentHp = maxHp;
         playerHp.text = currentHp.ToString();
         gameManager = FindObjectOfType<GameManager>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
@@ -90,7 +93,7 @@ public class Character : MonoBehaviour
         if (!isDead)
         {
             ChangeMovementDependentOnCamera();
-            
+
             if (Input.GetKeyDown(gameManager.attackKey))
             {
                 animator.SetTrigger(Attack1);
@@ -164,8 +167,8 @@ public class Character : MonoBehaviour
                 AnimatorLerp(1);
             }
         }
-
     }
+
     private void AnimatorLerp(float direction, float duration = 0.5f)
     {
         tweener?.Kill();
@@ -186,6 +189,8 @@ public class Character : MonoBehaviour
             Debug.Log("enemy" + enemy.name);
             enemy.GetComponent<ObstacleHp>().Damage(attackDamage);
         }
+
+        audioManager.PlaySound(1);
     }
 
     public void Idle()
@@ -215,6 +220,7 @@ public class Character : MonoBehaviour
         ground.degreesPerSecond = characterSpeed;
         isDead = true;
         animator.SetTrigger(Die);
+        audioManager.PlaySound(3);
     }
 
     public void Run()
