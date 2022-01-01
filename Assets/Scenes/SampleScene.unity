@@ -4090,6 +4090,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: bb4c703a320dc8548a6b458f4eeb3c3f, type: 2}
   - {fileID: 2100000, guid: 3491b7566ce05d54a8c77c039adf4505, type: 2}
   - {fileID: 2100000, guid: 1136d5ec75a9fcf49b389580efa4650b, type: 2}
+  obstacleHp: {fileID: 0}
 --- !u!4 &1918255661
 Transform:
   m_ObjectHideFlags: 0
@@ -4174,6 +4175,7 @@ MonoBehaviour:
   parentGround: {fileID: 919132148809346864}
   randomMaterials: 0
   materials: []
+  obstacleHp: {fileID: 0}
 --- !u!1 &2046454335
 GameObject:
   m_ObjectHideFlags: 0
@@ -4877,6 +4879,14 @@ PrefabInstance:
       propertyPath: groundObject
       value: 
       objectReference: {fileID: 919132148809346864}
+    - target: {fileID: 5185340024031245220, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
+      propertyPath: characterLine
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5185340024031245220, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 192
+      objectReference: {fileID: 0}
     - target: {fileID: 5185340024031245221, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
       propertyPath: m_RootOrder
       value: 4

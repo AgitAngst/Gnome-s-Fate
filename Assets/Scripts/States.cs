@@ -17,5 +17,12 @@ public class States : MonoBehaviour
         Obstacle,
         Enemy
     }
+
+    public enum CharacterLine
+    {
+        Left,
+        Center,
+        Right
+    }
     
 }

@@ -1,13 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class ObstacleHp : MonoBehaviour
 {
-   
     [FormerlySerializedAs("maxHP")] public int maxHp = 1;
     public bool getDistance = false;
     private int currentHp;
@@ -20,6 +16,14 @@ public class ObstacleHp : MonoBehaviour
     private AudioManager audioManager;
     private static readonly int Attack = Animator.StringToHash("Attack");
     public States.ObstacleType obstacleType;
+    public SpawnedLineEnum spawnedLine;
+    public enum SpawnedLineEnum
+    {
+        Left,
+        Center,
+        Right
+    }
+
     private void Update()
     {
         switch (obstacleType)
@@ -42,6 +46,7 @@ public class ObstacleHp : MonoBehaviour
         {
             animator = gameObject.GetComponent<Animator>();
         }
+        CheckSpawnedLine();
     }
 
     public void Damage(int damage)
@@ -74,9 +79,29 @@ public class ObstacleHp : MonoBehaviour
 
     private void EnemyAttack()
     {
-        if(GetDistanceToPlayer()<= distanceToReact)
+        if (GetDistanceToPlayer() <= distanceToReact)
         {
             animator.SetTrigger(Attack);
+        }
+    }
+
+    void CheckSpawnedLine()
+    {
+        var lines = transform.position.x;
+
+        if (lines <= -3f)
+        {
+            spawnedLine  = SpawnedLineEnum.Left;
+        }
+        else if (lines >= 3f)
+
+        {
+            spawnedLine = SpawnedLineEnum.Right;
+        }
+        else
+        {
+            spawnedLine = SpawnedLineEnum.Center;
+
         }
     }
 }

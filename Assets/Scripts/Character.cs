@@ -18,7 +18,11 @@ public class Character : MonoBehaviour
     private bool keyPressed = false;
     private Animator animator;
     private States state;
-    [FormerlySerializedAs("_states")] public States.CharacterState states;
+
+    [FormerlySerializedAs("states")] [FormerlySerializedAs("_states")]
+    public States.CharacterState characterStates;
+
+    public States.CharacterLine characterLine;
     private Ground ground;
     public GameObject groundObject;
     private float tmpSpeed;
@@ -54,7 +58,7 @@ public class Character : MonoBehaviour
 
     void Start()
     {
-        states = States.CharacterState.Idle;
+        characterStates = States.CharacterState.Idle;
         animator = GetComponentInChildren<Animator>();
         tmpSpeed = characterSpeed;
         ground = groundObject.GetComponent<Ground>();
@@ -68,7 +72,7 @@ public class Character : MonoBehaviour
     void Update()
     {
         CharacterControl();
-        switch (states)
+        switch (characterStates)
         {
             case States.CharacterState.Idle:
                 Idle();
@@ -102,9 +106,9 @@ public class Character : MonoBehaviour
 
             if (Input.GetKeyDown(gameManager.startRunKey))
             {
-                if (states == States.CharacterState.Idle)
+                if (characterStates == States.CharacterState.Idle)
                 {
-                    states = States.CharacterState.Running;
+                    characterStates = States.CharacterState.Running;
 
                     characterSpeed = tmpSpeed += gameManager.scoreMultiplyer;
                 }
@@ -125,7 +129,10 @@ public class Character : MonoBehaviour
                 if (positionSum <= -3f)
                 {
                     positionSum = -3f;
+                    characterLine = States.CharacterLine.Left;
                 }
+                else characterLine = States.CharacterLine.Center;
+
 
                 transform.DOMove(new Vector3(positionSum, 0, 0), 1f);
                 AnimatorLerp(-1);
@@ -139,7 +146,10 @@ public class Character : MonoBehaviour
                 if (positionSum >= 3f)
                 {
                     positionSum = 3f;
+                    characterLine = States.CharacterLine.Right;
                 }
+                else characterLine = States.CharacterLine.Center;
+
 
                 transform.DOMove(new Vector3(positionSum, 0, 0), 1f);
                 AnimatorLerp(1);
@@ -154,7 +164,10 @@ public class Character : MonoBehaviour
                 if (positionSum <= -3f)
                 {
                     positionSum = -3f;
+                    characterLine = States.CharacterLine.Left;
                 }
+                else characterLine = States.CharacterLine.Center;
+
 
                 transform.DOMove(new Vector3(positionSum, 0, 0), 1f);
                 AnimatorLerp(-1);
@@ -167,7 +180,10 @@ public class Character : MonoBehaviour
                 if (positionSum >= 3f)
                 {
                     positionSum = 3f;
+                    characterLine = States.CharacterLine.Right;
                 }
+                else characterLine = States.CharacterLine.Center;
+
 
                 transform.DOMove(new Vector3(positionSum, 0, 0), 1f);
                 AnimatorLerp(1);
@@ -216,7 +232,7 @@ public class Character : MonoBehaviour
         }
         else
         {
-            states = States.CharacterState.Dead;
+            characterStates = States.CharacterState.Dead;
             Death();
         }
     }

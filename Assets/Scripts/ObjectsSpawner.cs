@@ -24,6 +24,7 @@ public class ObjectsSpawner : MonoBehaviour
     public Material[] materials;
     private GameObject spawn;
     private GameObject epicSpawn;
+    public ObstacleHp obstacleHp;
 
     void Start()
     {
@@ -54,7 +55,6 @@ public class ObjectsSpawner : MonoBehaviour
         {
             spawn = Instantiate(objects[Random.Range(0, objects.Length)], spawnPoints[spawnPoint].transform.position,
                 Quaternion.Euler(90, 0, Random.Range(rotationDegrees.x, rotationDegrees.y)));
-
             if (enableEpicObjects && epicSpawnChance <= epicObjectsSpawnRate)
             {
                 epicSpawn = Instantiate(epicObjects[Random.Range(0, epicObjects.Length)],
@@ -97,6 +97,7 @@ public class ObjectsSpawner : MonoBehaviour
             timeLeft = Random.Range(timeToSpawnObjects.x, timeToSpawnObjects.y);
         }
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
