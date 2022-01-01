@@ -627,6 +627,8 @@ MonoBehaviour:
   maxHp: 1
   getDistance: 1
   scorePerObject: 2500
+  distanceToReact: 3
+  obstacleType: 1
 --- !u!1 &5169787773542931407
 GameObject:
   m_ObjectHideFlags: 0

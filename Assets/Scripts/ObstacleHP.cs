@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class ObstacleHp : MonoBehaviour
 {
+   
     [FormerlySerializedAs("maxHP")] public int maxHp = 1;
     public bool getDistance = false;
     private int currentHp;
@@ -13,12 +15,21 @@ public class ObstacleHp : MonoBehaviour
     private Character character;
     private GameManager gameManager;
     private Animator animator;
+    public float distanceToReact = 3f;
     private float distance;
     private AudioManager audioManager;
-
+    private static readonly int Attack = Animator.StringToHash("Attack");
+    public States.ObstacleType obstacleType;
     private void Update()
     {
-        GetDistanceToPlayer();
+        switch (obstacleType)
+        {
+            case States.ObstacleType.Enemy:
+                EnemyAttack();
+                break;
+            case States.ObstacleType.Obstacle:
+                break;
+        }
     }
 
     private void Start()
@@ -51,17 +62,21 @@ public class ObstacleHp : MonoBehaviour
         audioManager.PlaySound(6);
     }
 
-    private void GetDistanceToPlayer()
+    private float GetDistanceToPlayer()
     {
         if (getDistance)
         {
             distance = Vector3.Distance(character.transform.position, gameObject.transform.position);
-
-            if (distance <= 3f)
-            {
-                animator.SetTrigger("Attack");
-            }
         }
-       
+
+        return distance;
+    }
+
+    private void EnemyAttack()
+    {
+        if(GetDistanceToPlayer()<= distanceToReact)
+        {
+            animator.SetTrigger(Attack);
+        }
     }
 }

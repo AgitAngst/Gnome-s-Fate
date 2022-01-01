@@ -12,4 +12,10 @@ public class States : MonoBehaviour
         
     }
     
+    public enum ObstacleType
+    {
+        Obstacle,
+        Enemy
+    }
+    
 }
