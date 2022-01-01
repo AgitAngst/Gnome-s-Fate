@@ -15,15 +15,20 @@ public class ObstacleHp : MonoBehaviour
     private GameManager gameManager;
     private Animator animator;
     public float distanceToReact = 3f;
-    public float distanceToMove = 10f;
+
+    [FormerlySerializedAs("distanceToMove")]
+    public float distanceToMoveMax = 10f;
+
+    public float distanceToMoveMin = 7;
     private float distance;
     private AudioManager audioManager;
     private static readonly int Attack = Animator.StringToHash("Attack");
     public States.ObstacleType obstacleType;
     [FormerlySerializedAs("spawnedLine")] public EnemyLineEnum enemyLine;
-    private int playerLine;
+    private int playerLineInt;
     private int nextLineToJump;
     private static readonly int IsJumping = Animator.StringToHash("isJumping");
+    private int enemyLineInt;
 
     public enum EnemyLineEnum
     {
@@ -119,15 +124,25 @@ public class ObstacleHp : MonoBehaviour
         switch (enemyLine)
         {
             case EnemyLineEnum.Center:
-                if (GetDistanceToPlayer() <= distanceToMove && canJump)
+                if (GetDistanceToPlayer() <= Random.Range(distanceToMoveMin, distanceToMoveMax) && canJump)
                 {
                     JumpToAnotherLine();
                 }
 
                 break;
             case EnemyLineEnum.Left:
+                if (GetDistanceToPlayer() <= Random.Range(distanceToMoveMin, distanceToMoveMax) && canJump)
+                {
+                    JumpToAnotherLine();
+                }
+
                 break;
             case EnemyLineEnum.Right:
+                if (GetDistanceToPlayer() <= Random.Range(distanceToMoveMin, distanceToMoveMax) && canJump)
+                {
+                    JumpToAnotherLine();
+                }
+
                 break;
         }
     }
@@ -135,52 +150,92 @@ public class ObstacleHp : MonoBehaviour
     private void JumpToAnotherLine()
     {
         CheckEnemyLineToJump();
-        animator.SetBool(IsJumping, true);
         var position = transform.position;
-        transform.DOMove(new Vector3(nextLineToJump, position.y, position.z), .5f).SetEase(Ease.InOutExpo).OnComplete(
-            () =>
+        if (enemyLineInt == playerLineInt)
+        {
+            canJump = false;
+        }
+        else
+        {
+            if (Random.value <= 0.5f)
             {
-                animator.SetBool(IsJumping, false);
-                canJump = false;
-                CheckEnemyLine();
-            });
+                animator.SetBool(IsJumping, true);
+                transform.DOMoveX(nextLineToJump, .5f).SetEase(Ease.InOutExpo).OnComplete(
+                    () =>
+                    {
+                        animator.SetBool(IsJumping, false);
+                        canJump = false;
+                        CheckEnemyLine();
+                    });
+            }
+        }
     }
 
     private int CheckEnemyLineToJump()
     {
+        CheckPlayerLine();
         isStayingInPlace = Random.value <= .5f;
-        switch (enemyLine)
+        if (!isStayingInPlace)
         {
-            case EnemyLineEnum.Center:
-                if (!isStayingInPlace)
-                {
-                    if (Random.value <= 0.5f)
-                    {
-                        nextLineToJump = -3;
-                    }
-                    else nextLineToJump = 3;
-                }
-                break;
-            case EnemyLineEnum.Right:
-                if (!isStayingInPlace)
-                {
-                    if (Random.value <= 0.5f)
-                    {
-                        nextLineToJump = -3;
-                    }
-                    else nextLineToJump = 0;
-                }
-                break;
-            case EnemyLineEnum.Left:
+            switch (enemyLine)
             {
-                if (Random.value <= 0.5f)
+                // case EnemyLineEnum.Center:
+                //     if (!isStayingInPlace)
+                //     {
+                //         if (Random.value <= 0.5f)
+                //         {
+                //             nextLineToJump = -3;
+                //         }
+                //         else nextLineToJump = 3;
+                //     }
+                case EnemyLineEnum.Center:
+                    switch (playerLineInt)
+                    {
+                        case -1:
+                            nextLineToJump = -3;
+                            break;
+                        case 0:
+                            break;
+                        case 1:
+                            nextLineToJump = 3;
+                            break;
+                    }
+
+                    break;
+                case EnemyLineEnum.Right:
+                    switch (playerLineInt)
+                    {
+                        case -1:
+                            nextLineToJump = -3;
+                            break;
+                        case 0:
+                            nextLineToJump = 0;
+                            break;
+                        case 1:
+                          //  nextLineToJump = 3;
+                            break;
+                    }
+
+                    break;
+                case EnemyLineEnum.Left:
                 {
-                    nextLineToJump = 0;
+                    switch (playerLineInt)
+                    {
+                        case -1:
+                           // nextLineToJump = -3;
+                            break;
+                        case 0:
+                            nextLineToJump = 0;
+                            break;
+                        case 1:
+                              nextLineToJump = 3;
+                            break;
+                    }
                 }
-                else nextLineToJump = 3;
+                    break;
             }
-                break;
         }
+
 
         return nextLineToJump;
     }
@@ -190,16 +245,16 @@ public class ObstacleHp : MonoBehaviour
         switch (character.characterLine)
         {
             case States.CharacterLine.Left:
-                playerLine = -1;
+                playerLineInt = -1;
                 break;
             case States.CharacterLine.Right:
-                playerLine = 1;
+                playerLineInt = 1;
                 break;
             case States.CharacterLine.Center:
-                playerLine = 0;
+                playerLineInt = 0;
                 break;
         }
 
-        return playerLine;
+        return playerLineInt;
     }
 }
