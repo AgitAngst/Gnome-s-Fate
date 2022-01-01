@@ -29,6 +29,8 @@ public class ObstacleHp : MonoBehaviour
     private int nextLineToJump;
     private static readonly int IsJumping = Animator.StringToHash("isJumping");
     private int enemyLineInt;
+    private bool isRigidbodyEnabled = false;
+    private RigidbodyController rigidbodyController;
 
     public enum EnemyLineEnum
     {
@@ -61,6 +63,7 @@ public class ObstacleHp : MonoBehaviour
             animator = gameObject.GetComponent<Animator>();
         }
 
+        rigidbodyController = gameObject.GetComponent<RigidbodyController>();
         CheckEnemyLine();
     }
 
@@ -78,7 +81,16 @@ public class ObstacleHp : MonoBehaviour
     {
         var score = scorePerObject * gameManager.scoreMultiplyer;
         character.characterEvents.CashUpdate(Mathf.RoundToInt(score));
-        Destroy(gameObject);
+        if (rigidbodyController)
+        {
+            gameObject.transform.parent = null;
+            rigidbodyController.EnableRigibody(true);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         audioManager.PlaySound(6);
     }
 
@@ -212,7 +224,7 @@ public class ObstacleHp : MonoBehaviour
                             nextLineToJump = 0;
                             break;
                         case 1:
-                          //  nextLineToJump = 3;
+                            //  nextLineToJump = 3;
                             break;
                     }
 
@@ -222,13 +234,13 @@ public class ObstacleHp : MonoBehaviour
                     switch (playerLineInt)
                     {
                         case -1:
-                           // nextLineToJump = -3;
+                            // nextLineToJump = -3;
                             break;
                         case 0:
                             nextLineToJump = 0;
                             break;
                         case 1:
-                              nextLineToJump = 3;
+                            nextLineToJump = 3;
                             break;
                     }
                 }

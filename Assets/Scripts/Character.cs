@@ -244,6 +244,7 @@ public class Character : MonoBehaviour
         isDead = true;
         animator.SetTrigger(Die);
         audioManager.PlaySound(3);
+        gameObject.GetComponent<Collider>().isTrigger = true;
     }
 
     public void Run()

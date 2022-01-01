@@ -299,17 +299,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitBeforeChangeSide: 0.5
   characterSpeed: 20
-  states: 0
+  characterStates: 0
+  characterLine: 1
   groundObject: {fileID: 0}
   keyPressTimer: 0.5
   isDead: 0
   lerpDuration: 0.5
   characterEvents: {fileID: 1273643483}
   attackPoint: {fileID: 1790312721}
-  attackRange: 1.03
+  attackRange: 1
   layerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   attackDamage: 1
   maxHp: 3
   playerHp: {fileID: 0}
