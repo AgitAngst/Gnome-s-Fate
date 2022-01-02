@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
     private float positionSum;
     private float animatorBlendValue;
     public bool isDead = false;
-
+    public GameObject Weapon;
     private float test1;
     private float lerpTimeElapsed;
     public float lerpDuration = 0.5f;
@@ -40,7 +40,6 @@ public class Character : MonoBehaviour
     private static readonly int Attack1 = Animator.StringToHash("Attack");
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
     private TweenerCore<float, float, FloatOptions> tweener;
-
 
     public CharacterEvents characterEvents;
     private GameManager gameManager;
@@ -55,6 +54,7 @@ public class Character : MonoBehaviour
     private float blendDirectionValue;
     private static readonly int Hurt = Animator.StringToHash("Hurt");
     private AudioManager audioManager;
+    private RigidbodyController rigidbodyController;
 
     void Start()
     {
@@ -67,6 +67,7 @@ public class Character : MonoBehaviour
         playerHp.text = currentHp.ToString();
         gameManager = FindObjectOfType<GameManager>();
         audioManager = FindObjectOfType<AudioManager>();
+        rigidbodyController = GetComponent<RigidbodyController>();
     }
 
     void Update()
@@ -89,6 +90,10 @@ public class Character : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.layer == layerMask)
+        {
+            Debug.Log("Why this Character trigger is not working?");
+        }
         TakeDamage(1);
     }
 
@@ -189,6 +194,11 @@ public class Character : MonoBehaviour
                 AnimatorLerp(1);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            Death();
+        }
     }
 
     private void AnimatorLerp(float direction, float duration = 0.5f)
@@ -208,7 +218,7 @@ public class Character : MonoBehaviour
         Collider[] hitenemies = Physics.OverlapSphere(attackPoint.transform.position, attackRange, layerMask);
         foreach (Collider enemy in hitenemies)
         {
-            Debug.Log("enemy" + enemy.name);
+            // Debug.Log("enemy" + enemy.name);
             enemy.GetComponent<ObstacleHp>().Damage(attackDamage);
         }
 
@@ -242,9 +252,13 @@ public class Character : MonoBehaviour
         characterSpeed = 0f;
         ground.degreesPerSecond = characterSpeed;
         isDead = true;
-        animator.SetTrigger(Die);
+        rigidbodyController.EnableRigibody(true);
+        //animator.SetTrigger(Die);
         audioManager.PlaySound(3);
         gameObject.GetComponent<Collider>().isTrigger = true;
+        Weapon.transform.parent = null;
+        Weapon.GetComponent<Rigidbody>().isKinematic = false;
+        Weapon.GetComponent<Collider>().isTrigger = false;
     }
 
     public void Run()

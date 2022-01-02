@@ -1007,8 +1007,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7861527c1855bd54a9f0b20fe2797def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
   ragdollParts: []
   rigidbodyParts: []
+  animator: {fileID: 3615544756989555663}
 --- !u!1 &5169787773542931407
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,13 +1,21 @@
+using System;
 using System.Collections.Generic;
+using Packages.Rider.Editor.UnitTesting;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class RigidbodyController : MonoBehaviour
 {
+    public bool isPlayer = false;
     public List<Collider> ragdollParts = new List<Collider>();
-    [FormerlySerializedAs("rigidbodieParts")] public List<Rigidbody> rigidbodyParts = new List<Rigidbody>();
+
+    [FormerlySerializedAs("rigidbodieParts")]
+    public List<Rigidbody> rigidbodyParts = new List<Rigidbody>();
+
     private Collider baseCollider;
-    private Animator animator;
+    public Animator animator;
+
     private void Awake()
     {
         RagdollInit();
@@ -17,15 +25,19 @@ public class RigidbodyController : MonoBehaviour
     void Start()
     {
         baseCollider = this.gameObject.GetComponent<Collider>();
-        animator = this.gameObject.GetComponent<Animator>();
+        //  animator = this.gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     EnableRigibody(true);
+        // }
     }
 
-    public void EnableRigibody(bool isEnabled )
+    public void EnableRigibody(bool isEnabled)
     {
         if (isEnabled)
         {
@@ -34,8 +46,9 @@ public class RigidbodyController : MonoBehaviour
             {
                 Debug.Log(r);
                 r.isKinematic = false;
-                r.AddExplosionForce(30,Vector3.forward, 10f);
+                r.AddExplosionForce(1, Vector3.forward, 10f);
             }
+
             foreach (var c in ragdollParts.ToArray())
             {
                 c.isTrigger = false;
@@ -50,16 +63,15 @@ public class RigidbodyController : MonoBehaviour
                     Debug.Log(r);
                     r.isKinematic = true;
                 }
+
                 foreach (var c in ragdollParts.ToArray())
                 {
                     c.isTrigger = true;
                 }
-            
             }
-
         }
-
     }
+
     void SetRagdollParts()
     {
         Collider[] colliders = this.gameObject.GetComponentsInChildren<Collider>();
@@ -79,11 +91,13 @@ public class RigidbodyController : MonoBehaviour
         {
             r.isKinematic = true;
             r.collisionDetectionMode = CollisionDetectionMode.Continuous;
-            r.gameObject.layer = 8;
             r.mass /= 200;
-            r.constraints = RigidbodyConstraints.FreezePositionZ;
+            if (!isPlayer)
+            {
+                r.gameObject.layer = 8;
+                r.constraints = RigidbodyConstraints.FreezePositionZ;
+            }
             rigidbodyParts.Add(r);
-
         }
     }
 }
