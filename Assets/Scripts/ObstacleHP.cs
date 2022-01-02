@@ -84,13 +84,15 @@ public class ObstacleHp : MonoBehaviour
         if (rigidbodyController)
         {
             var o = gameObject;
-            o.transform.parent = null;
+            character.WeaponLightingIntensity();
+
             Destroy(o);
 
             //rigidbodyController.EnableRigibody(true); //TODO Make nice death animation (procedural or rigidbody)
         }
         else
         {
+            character.WeaponLightingIntensity();
             Destroy(gameObject);
         }
 

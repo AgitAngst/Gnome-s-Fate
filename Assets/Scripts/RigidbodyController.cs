@@ -86,18 +86,21 @@ public class RigidbodyController : MonoBehaviour
 
     void RagdollInit()
     {
-        Rigidbody[] rigidbodies = this.gameObject.GetComponentsInChildren<Rigidbody>();
-        foreach (Rigidbody r in rigidbodies)
         {
-            r.isKinematic = true;
-            r.collisionDetectionMode = CollisionDetectionMode.Continuous;
-            r.mass /= 200;
-            if (!isPlayer)
+            Rigidbody[] rigidbodies = this.gameObject.GetComponentsInChildren<Rigidbody>();
+            foreach (Rigidbody r in rigidbodies)
             {
-                r.gameObject.layer = 8;
-                r.constraints = RigidbodyConstraints.FreezePositionZ;
+                r.isKinematic = true;
+                r.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                r.mass /= 200;
+                if (!isPlayer)
+                {
+                    r.gameObject.layer = 8;
+                    r.constraints = RigidbodyConstraints.FreezePositionZ;
+                }
+
+                rigidbodyParts.Add(r);
             }
-            rigidbodyParts.Add(r);
         }
     }
 }

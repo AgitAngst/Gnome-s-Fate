@@ -31,7 +31,18 @@ public class Character : MonoBehaviour
     private float positionSum;
     private float animatorBlendValue;
     public bool isDead = false;
-    public GameObject Weapon;
+    [FormerlySerializedAs("Weapon")] public GameObject weapon;
+    private Light weaponLight;
+    public float weaponLightIntensity = 600f;
+    public float weaponLightOnDuration = 2f;
+    public float weaponLightOffDuration = 7f;
+
+    [FormerlySerializedAs("weaponEmissiveStrenght")]
+    public float weaponEmissiveStrength = 10f;
+
+    [FormerlySerializedAs("weaponGlowintTime")] [SerializeField]
+    private float weaponGlowingTimer;
+
     private float test1;
     private float lerpTimeElapsed;
     public float lerpDuration = 0.5f;
@@ -40,6 +51,8 @@ public class Character : MonoBehaviour
     private static readonly int Attack1 = Animator.StringToHash("Attack");
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
     private TweenerCore<float, float, FloatOptions> tweener;
+    private TweenerCore<float, float, FloatOptions> tweenerWeapon;
+    private TweenerCore<float, float, FloatOptions> tweenerWeaponEmission;
 
     public CharacterEvents characterEvents;
     private GameManager gameManager;
@@ -55,6 +68,8 @@ public class Character : MonoBehaviour
     private static readonly int Hurt = Animator.StringToHash("Hurt");
     private AudioManager audioManager;
     private RigidbodyController rigidbodyController;
+    private static readonly int EmissiveIntensity = Shader.PropertyToID("_EmissiveIntensity");
+    public Material playerMaterial;
 
     void Start()
     {
@@ -68,6 +83,8 @@ public class Character : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         audioManager = FindObjectOfType<AudioManager>();
         rigidbodyController = GetComponent<RigidbodyController>();
+        weaponLight = weapon.GetComponentInChildren<Light>();
+        playerMaterial.EnableKeyword("_EmissiveIntensity");
     }
 
     void Update()
@@ -94,6 +111,7 @@ public class Character : MonoBehaviour
         {
             Debug.Log("Why this Character trigger is not working?");
         }
+
         TakeDamage(1);
     }
 
@@ -225,6 +243,18 @@ public class Character : MonoBehaviour
         audioManager.PlaySound(1);
     }
 
+    public void WeaponLightingIntensity()
+    {
+        tweenerWeapon?.Kill();
+        tweenerWeaponEmission?.Kill();
+
+        tweenerWeapon = weaponLight.DOIntensity(weaponLightIntensity, weaponLightOnDuration)
+            .OnComplete(() => { weaponLight.DOIntensity(0f, weaponLightOffDuration); });
+
+        tweenerWeaponEmission =  playerMaterial.DOFloat(10f, EmissiveIntensity, 10f)
+            .OnComplete(() => { playerMaterial.DOFloat(0f, EmissiveIntensity, 3); });
+    }
+
     public void Idle()
     {
         characterSpeed = 0f;
@@ -256,9 +286,9 @@ public class Character : MonoBehaviour
         //animator.SetTrigger(Die);
         audioManager.PlaySound(3);
         gameObject.GetComponent<Collider>().isTrigger = true;
-        Weapon.transform.parent = null;
-        Weapon.GetComponent<Rigidbody>().isKinematic = false;
-        Weapon.GetComponent<Collider>().isTrigger = false;
+        weapon.transform.parent = null;
+        weapon.GetComponent<Rigidbody>().isKinematic = false;
+        weapon.GetComponent<Collider>().isTrigger = false;
     }
 
     public void Run()
