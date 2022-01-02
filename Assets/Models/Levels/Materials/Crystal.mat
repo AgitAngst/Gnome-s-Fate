@@ -433,7 +433,7 @@ Material:
     - _DstBlend: 0
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 0.98
-    - _EmissiveIntensity: 162.5
+    - _EmissiveIntensity: 1
     - _EmissiveIntensityUnit: 0
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
@@ -523,7 +523,7 @@ Material:
     - _MetallicRemapMax1: 1
     - _MetallicRemapMax2: 1
     - _MetallicRemapMax3: 1
-    - _MetallicRemapMin: 0.99999994
+    - _MetallicRemapMin: 0
     - _MetallicRemapMin0: 0
     - _MetallicRemapMin1: 0
     - _MetallicRemapMin2: 0
@@ -570,12 +570,12 @@ Material:
     - _Smoothness1: 0.5
     - _Smoothness2: 0.5
     - _Smoothness3: 0.5
-    - _SmoothnessRemapMax: 0.9980523
+    - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMax0: 1
     - _SmoothnessRemapMax1: 1
     - _SmoothnessRemapMax2: 1
     - _SmoothnessRemapMax3: 1
-    - _SmoothnessRemapMin: 0.9980523
+    - _SmoothnessRemapMin: 0
     - _SmoothnessRemapMin0: 0
     - _SmoothnessRemapMin1: 0
     - _SmoothnessRemapMin2: 0
@@ -672,8 +672,8 @@ Material:
     - _EMISSION_COLOR: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _Emissive: {r: 337.79395, g: 337.79395, b: 337.79395, a: 0}
-    - _EmissiveColor: {r: 15.931366, g: 46.51961, b: 121.715675, a: 162.5}
-    - _EmissiveColorLDR: {r: 0.3458689, g: 0.5714868, b: 0.88031507, a: 1}
+    - _EmissiveColor: {r: 0.09803917, g: 0.29019606, b: 0.74901956, a: 1}
+    - _EmissiveColorLDR: {r: 0.3458689, g: 0.5750484, b: 0.88031507, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _SPECULAR_COLOR: {r: 1, g: 1, b: 1, a: 0}
