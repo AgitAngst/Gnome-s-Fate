@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 2977.7356
       objectReference: {fileID: 0}
+    - target: {fileID: 2355535438322468416, guid: 759bbf5bc7a3b144082e491fdf9aceb2, type: 3}
+      propertyPath: ShapeModule.m_Mesh
+      value: 
+      objectReference: {fileID: 380950148072674761, guid: 4b08e4e65b78ffd4ea746ec6b9572bea, type: 3}
     - target: {fileID: 3980233135943653054, guid: 759bbf5bc7a3b144082e491fdf9aceb2, type: 3}
       propertyPath: m_Layer
       value: 6

@@ -7,9 +7,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2355535438322468416, guid: 759bbf5bc7a3b144082e491fdf9aceb2, type: 3}
+      propertyPath: ShapeModule.m_Mesh
+      value: 
+      objectReference: {fileID: -3114660965238278304, guid: e779b1a9a27d19b4795dc9bf4f6cc467, type: 3}
     - target: {fileID: 4673632562143307589, guid: 759bbf5bc7a3b144082e491fdf9aceb2, type: 3}
       propertyPath: m_Name
-      value: SM_LevelCrystal_001 (4)
+      value: SM_LevelCrystal_001 (4) Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5447038471169408511, guid: 759bbf5bc7a3b144082e491fdf9aceb2, type: 3}
       propertyPath: m_RootOrder
