@@ -83,8 +83,11 @@ public class ObstacleHp : MonoBehaviour
         character.characterEvents.CashUpdate(Mathf.RoundToInt(score));
         if (rigidbodyController)
         {
-            gameObject.transform.parent = null;
-            rigidbodyController.EnableRigibody(true);
+            var o = gameObject;
+            o.transform.parent = null;
+            Destroy(o);
+
+            //rigidbodyController.EnableRigibody(true); //TODO Make nice death animation (procedural or rigidbody)
         }
         else
         {
