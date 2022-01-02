@@ -5002,6 +5002,10 @@ PrefabInstance:
       propertyPath: groundObject
       value: 
       objectReference: {fileID: 919132148809346864}
+    - target: {fileID: 5185340024031245220, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
+      propertyPath: weaponLightIntensity
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 5185340024031245221, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
       propertyPath: m_RootOrder
       value: 4
