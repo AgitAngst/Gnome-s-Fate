@@ -48,7 +48,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5185340023726559431
 Transform:
   m_ObjectHideFlags: 0
@@ -76,7 +76,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.99201745, b: 0.06132078, a: 1}
-  m_Intensity: 131072
+  m_Intensity: 32.483284
   m_Range: 6.72
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 20
+  m_Intensity: 8.0216255
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -305,7 +305,12 @@ MonoBehaviour:
   groundObject: {fileID: 0}
   keyPressTimer: 0.5
   isDead: 0
-  Weapon: {fileID: 5419922271351513169}
+  weapon: {fileID: 5419922271351513169}
+  weaponLightIntensity: 10
+  weaponLightOnDuration: 0.5
+  weaponLightOffDuration: 1
+  weaponEmissiveStrength: 10
+  weaponGlowingTimer: 3
   lerpDuration: 0.5
   characterEvents: {fileID: 1273643483}
   attackPoint: {fileID: 1790312721}
@@ -316,6 +321,7 @@ MonoBehaviour:
   attackDamage: 1
   maxHp: 3
   playerHp: {fileID: 0}
+  playerMaterial: {fileID: 2100000, guid: d6adb94554bb8be4182ddf5aec9b8c98, type: 2}
 --- !u!136 &5185340024031245226
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -324,7 +330,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5185340024031245223}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.24
   m_Height: 2
@@ -1486,6 +1492,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1988095894606887321}
     m_Modifications:
+    - target: {fileID: 2066874264, guid: 08cc26d2dc39f724bbcb3de70a6d6efc, type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2066874265, guid: 08cc26d2dc39f724bbcb3de70a6d6efc, type: 3}
+      propertyPath: m_Range
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2066874265, guid: 08cc26d2dc39f724bbcb3de70a6d6efc, type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7459211071351348480, guid: 08cc26d2dc39f724bbcb3de70a6d6efc, type: 3}
       propertyPath: m_RootOrder
       value: 2
