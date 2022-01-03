@@ -32,6 +32,8 @@ public class ObstacleHp : MonoBehaviour
     private bool isRigidbodyEnabled = false;
    // private RigidbodyController rigidbodyController;
     private Vector3 positionToJump;
+    private static readonly int IsDancing = Animator.StringToHash("isDancing");
+    private static readonly int IsFalling = Animator.StringToHash("isFalling");
 
     public enum EnemyLineEnum
     {
@@ -51,6 +53,7 @@ public class ObstacleHp : MonoBehaviour
             case States.ObstacleType.Obstacle:
                 break;
         }
+        
     }
 
     private void Start()
@@ -93,7 +96,7 @@ public class ObstacleHp : MonoBehaviour
                 // })
                 .OnStart(() =>
                 {
-                    animator.SetBool("isFalling",true);
+                    animator.SetBool(IsFalling,true);
                 })
                 .OnComplete(() => Destroy(o));
             //rigidbodyController.EnableRigibody(true); //TODO Make nice death animation (procedural or rigidbody)
@@ -137,6 +140,7 @@ public class ObstacleHp : MonoBehaviour
     {
         if (GetDistanceToPlayer() <= distanceToReact)
         {
+  
             animator.SetTrigger(Attack);
         }
     }
