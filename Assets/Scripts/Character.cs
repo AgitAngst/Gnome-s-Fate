@@ -29,7 +29,6 @@ public class Character : MonoBehaviour
     public float keyPressTimer = 0.5f;
     private ObjectsSpawner objectsSpawner;
     private float positionSum;
-    private float animatorBlendValue;
     public bool isDead = false;
     [FormerlySerializedAs("Weapon")] public GameObject weapon;
     private Light weaponLight;
@@ -272,13 +271,13 @@ public class Character : MonoBehaviour
         }
         else
         {
-            characterStates = States.CharacterState.Dead;
             Death();
         }
     }
 
     public void Death()
     {
+        characterStates = States.CharacterState.Dead;
         characterSpeed = 0f;
         ground.degreesPerSecond = characterSpeed;
         isDead = true;
@@ -309,11 +308,6 @@ public class Character : MonoBehaviour
                 keyPressed = false;
             }
         }
-    }
-
-    void ResetBlend()
-    {
-        animatorBlendValue = 0.5f;
     }
 
     private void OnDrawGizmosSelected()

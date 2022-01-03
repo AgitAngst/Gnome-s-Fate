@@ -19,32 +19,40 @@ public class ObjectsSpawner : MonoBehaviour
     public Vector2 rotationDegrees;
 
     public GameObject parentGround;
-    private States.CharacterState states;
+    private Character states;
     public bool randomMaterials = false;
     public Material[] materials;
     private GameObject spawn;
     private GameObject epicSpawn;
-    public ObstacleHp obstacleHp;
-
+   [HideInInspector] public ObstacleHp obstacleHp;
+    private bool isCanSpawn = true;
     void Start()
     {
+        states = FindObjectOfType<Character>();
+
+        isCanSpawn = states != (states.characterStates == States.CharacterState.Idle);
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch (states)
+        switch (states.characterStates)
         {
             case States.CharacterState.Idle:
+                isCanSpawn = false;
                 break;
             case States.CharacterState.Running:
-                SpawnObjects();
+                isCanSpawn = true;
                 break;
             case States.CharacterState.Dead:
+                isCanSpawn = false;
                 break;
         }
 
-        SpawnObjects();
+        if (isCanSpawn)
+        {
+            SpawnObjects();
+        }
     }
 
     void Spawn()
@@ -91,11 +99,13 @@ public class ObjectsSpawner : MonoBehaviour
     void SpawnObjects()
     {
         timeLeft -= Time.deltaTime;
-        if (timeLeft <= 0)
-        {
-            Spawn();
-            timeLeft = Random.Range(timeToSpawnObjects.x, timeToSpawnObjects.y);
-        }
+            if (timeLeft <= 0)
+            {
+                Spawn();
+                timeLeft = Random.Range(timeToSpawnObjects.x, timeToSpawnObjects.y);
+            }
+        
+
     }
 
 
