@@ -29,7 +29,6 @@ public class ObjectsSpawner : MonoBehaviour
     void Start()
     {
         states = FindObjectOfType<Character>();
-
         isCanSpawn = states != (states.characterStates == States.CharacterState.Idle);
     }
 
