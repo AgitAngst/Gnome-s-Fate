@@ -99,7 +99,7 @@ public class ObstacleHp : MonoBehaviour
         {
             var o = gameObject;
             character.WeaponLightingIntensity();
-            o.transform.DOJump(DeadJump(),7f,1,2f,false)
+            o.transform.DOJump(DeadJump(),9f,1,2f,false)
                 // .OnUpdate(() =>
                 // {
                 //     o.transform.DOScale(new Vector3(0, 0, 0), 2f);
