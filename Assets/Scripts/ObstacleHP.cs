@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -49,11 +50,20 @@ public class ObstacleHp : MonoBehaviour
             case States.ObstacleType.Enemy:
                 EnemyAttack();
                 JumpOverTheLine();
+                DanceOnPlayerDeath();
                 break;
             case States.ObstacleType.Obstacle:
                 break;
         }
         
+    }
+
+    private void DanceOnPlayerDeath()
+    {
+        if (character.characterStates == States.CharacterState.Dead)
+        {
+            animator.SetTrigger(IsDancing);
+        }
     }
 
     private void Start()
