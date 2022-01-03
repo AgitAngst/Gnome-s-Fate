@@ -4166,7 +4166,7 @@ MonoBehaviour:
   - {fileID: 949983309172416932, guid: 9a866b1d2c1f71b4a9d58dfc351d97c6, type: 3}
   - {fileID: 8501804201295439871, guid: 6bdb3894e2d712640a512be543331be8, type: 3}
   enableEpicObjects: 1
-  epicObjectsSpawnRate: 0.104
+  epicObjectsSpawnRate: 1
   epicObjects:
   - {fileID: 4534446552243645965, guid: e04e2b46c3773d24f9f707136638b467, type: 3}
   spawnPoints:

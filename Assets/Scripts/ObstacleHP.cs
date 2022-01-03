@@ -30,7 +30,8 @@ public class ObstacleHp : MonoBehaviour
     private static readonly int IsJumping = Animator.StringToHash("isJumping");
     private int enemyLineInt;
     private bool isRigidbodyEnabled = false;
-    private RigidbodyController rigidbodyController;
+   // private RigidbodyController rigidbodyController;
+    private Vector3 positionToJump;
 
     public enum EnemyLineEnum
     {
@@ -63,7 +64,7 @@ public class ObstacleHp : MonoBehaviour
             animator = gameObject.GetComponent<Animator>();
         }
 
-        rigidbodyController = gameObject.GetComponent<RigidbodyController>();
+        //rigidbodyController = gameObject.GetComponent<RigidbodyController>();
         CheckEnemyLine();
     }
 
@@ -81,13 +82,20 @@ public class ObstacleHp : MonoBehaviour
     {
         var score = scorePerObject * gameManager.scoreMultiplyer;
         character.characterEvents.CashUpdate(Mathf.RoundToInt(score));
-        if (rigidbodyController)
+        if (obstacleType == States.ObstacleType.Enemy)
         {
             var o = gameObject;
             character.WeaponLightingIntensity();
-
-            Destroy(o);
-
+            o.transform.DOJump(DeadJump(),7f,1,2f,false)
+                // .OnUpdate(() =>
+                // {
+                //     o.transform.DOScale(new Vector3(0, 0, 0), 2f);
+                // })
+                .OnStart(() =>
+                {
+                    animator.SetBool("isFalling",true);
+                })
+                .OnComplete(() => Destroy(o));
             //rigidbodyController.EnableRigibody(true); //TODO Make nice death animation (procedural or rigidbody)
         }
         else
@@ -97,6 +105,22 @@ public class ObstacleHp : MonoBehaviour
         }
 
         audioManager.PlaySound(6);
+    }
+
+    Vector3 DeadJump()
+    {
+        if (Random.value <= 0.5f)
+        {
+            var position = transform.position;
+            positionToJump = new Vector3(-12f, -5f, 7f);
+        }
+        else
+        {
+            var position = transform.position;
+            positionToJump = new Vector3(12f, -5f, 7f);
+        }
+
+        return positionToJump;
     }
 
     private float GetDistanceToPlayer()
