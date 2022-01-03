@@ -69,6 +69,7 @@ public class Character : MonoBehaviour
     private RigidbodyController rigidbodyController;
     private static readonly int EmissiveIntensity = Shader.PropertyToID("_EmissiveIntensity");
     public Material playerMaterial;
+    private ReactionManager reactionManager;
 
     void Start()
     {
@@ -84,6 +85,7 @@ public class Character : MonoBehaviour
         rigidbodyController = GetComponent<RigidbodyController>();
         weaponLight = weapon.GetComponentInChildren<Light>();
         playerMaterial.EnableKeyword("_EmissiveIntensity");
+        reactionManager = FindObjectOfType<ReactionManager>();
     }
 
     void Update()
@@ -263,6 +265,7 @@ public class Character : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
+        reactionManager.ShakeCameraLight();
         playerHp.text = currentHp.ToString();
         if (currentHp >= 1)
         {
@@ -277,6 +280,7 @@ public class Character : MonoBehaviour
 
     public void Death()
     {
+        reactionManager.ShakeCameraHard();
         characterStates = States.CharacterState.Dead;
         characterSpeed = 0f;
         ground.degreesPerSecond = characterSpeed;

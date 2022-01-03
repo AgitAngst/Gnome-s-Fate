@@ -627,7 +627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 1
   getDistance: 1
-  scorePerObject: 2500
+  scorePerObject: 10
   distanceToReact: 3
   distanceToMoveMax: 10
   distanceToMoveMin: 7
