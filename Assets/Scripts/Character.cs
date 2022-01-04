@@ -15,6 +15,10 @@ public class Character : MonoBehaviour
     private float xPosition;
     public float waitBeforeChangeSide = 0.5f;
     public float characterSpeed = 20f;
+    
+    [Range(0,1)]
+    [SerializeField] private float characterSpeedDecreasePercent = .1f;
+    
     private bool keyPressed = false;
     private Animator animator;
     private States state;
@@ -272,6 +276,7 @@ public class Character : MonoBehaviour
         {
             animator.SetTrigger(Hurt);
             audioManager.PlaySound(5);
+            characterSpeed -= characterSpeed * characterSpeedDecreasePercent;
         }
         else
         {

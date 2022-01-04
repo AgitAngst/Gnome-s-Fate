@@ -4945,6 +4945,10 @@ PrefabInstance:
       propertyPath: weaponLightIntensity
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 5185340024031245220, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
+      propertyPath: characterSpeedDecreasePercent
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5185340024031245221, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
       propertyPath: m_RootOrder
       value: 4
