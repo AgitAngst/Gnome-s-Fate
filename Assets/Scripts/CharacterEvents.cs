@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CharacterEvents : MonoBehaviour
 {
@@ -12,6 +9,7 @@ public class CharacterEvents : MonoBehaviour
     private int cashCount = 0;
     private Character character;
     private AudioManager audioManager;
+
     void Start()
     {
         StepUpdate(0);
@@ -22,7 +20,6 @@ public class CharacterEvents : MonoBehaviour
 
     void Update()
     {
-        
     }
 
     public void Step()
@@ -35,6 +32,7 @@ public class CharacterEvents : MonoBehaviour
     {
         character.Attack();
     }
+
     public int StepUpdate(int count)
     {
         stepsCount += count;

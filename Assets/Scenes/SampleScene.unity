@@ -4165,8 +4165,8 @@ MonoBehaviour:
   - {fileID: 2986684338179720612, guid: fde0f888fee3d3546ae5b07cc4f2279d, type: 3}
   - {fileID: 949983309172416932, guid: 9a866b1d2c1f71b4a9d58dfc351d97c6, type: 3}
   - {fileID: 8501804201295439871, guid: 6bdb3894e2d712640a512be543331be8, type: 3}
-  enableEpicObjects: 1
-  epicObjectsSpawnRate: 1
+  enableEpicObjects: 0
+  epicObjectsSpawnRate: 0.351
   epicObjects:
   - {fileID: 4534446552243645965, guid: e04e2b46c3773d24f9f707136638b467, type: 3}
   spawnPoints:
@@ -4887,7 +4887,7 @@ PrefabInstance:
       objectReference: {fileID: 899350314}
     - target: {fileID: 1790312721, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.532
+      value: 2.26
       objectReference: {fileID: 0}
     - target: {fileID: 5185340024031245220, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
       propertyPath: playerHp

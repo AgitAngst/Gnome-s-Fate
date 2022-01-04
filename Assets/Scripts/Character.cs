@@ -259,7 +259,7 @@ public class Character : MonoBehaviour
     public void Idle()
     {
         characterSpeed = 0f;
-        ground.degreesPerSecond = characterSpeed;
+        ground.SetGroundSpeed(characterSpeed);
     }
 
     public void TakeDamage(int damage)
@@ -267,6 +267,7 @@ public class Character : MonoBehaviour
         currentHp -= damage;
         reactionManager.ShakeCameraLight();
         playerHp.text = currentHp.ToString();
+    //    gameManager.ChangeSpeed(-1.5f);
         if (currentHp >= 1)
         {
             animator.SetTrigger(Hurt);
@@ -283,7 +284,7 @@ public class Character : MonoBehaviour
         reactionManager.ShakeCameraHard();
         characterStates = States.CharacterState.Dead;
         characterSpeed = 0f;
-        ground.degreesPerSecond = characterSpeed;
+        ground.SetGroundSpeed(characterSpeed);
         isDead = true;
         rigidbodyController.EnableRigibody(true);
         //animator.SetTrigger(Die);
@@ -298,7 +299,7 @@ public class Character : MonoBehaviour
     {
         animator.SetBool(IsRunning, true);
         //characterSpeed = tmpSpeed;
-        ground.degreesPerSecond = characterSpeed;
+        ground.SetGroundSpeed(characterSpeed);
     }
 
 
