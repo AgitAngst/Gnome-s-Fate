@@ -4889,6 +4889,46 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 2.26
       objectReference: {fileID: 0}
+    - target: {fileID: 4646798073544243947, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646798073544243947, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.033
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646798073544243947, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.155
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646798073544243947, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.3047454
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646798073544243947, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.8200321
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646798073544243947, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.17021416
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646798073544243947, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.45354685
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646798073544243947, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -40.859
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646798073544243947, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -122.184
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646798073544243947, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -179.793
+      objectReference: {fileID: 0}
     - target: {fileID: 5185340024031245220, guid: fd3b66ad5f3f2ce4db4e1dae4d5e328c, type: 3}
       propertyPath: playerHp
       value: 
