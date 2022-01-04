@@ -24,8 +24,9 @@ public class ObjectsSpawner : MonoBehaviour
     public Material[] materials;
     private GameObject spawn;
     private GameObject epicSpawn;
-   [HideInInspector] public ObstacleHp obstacleHp;
+    [HideInInspector] public ObstacleHp obstacleHp;
     private bool isCanSpawn = true;
+
     void Start()
     {
         states = FindObjectOfType<Character>();
@@ -64,9 +65,11 @@ public class ObjectsSpawner : MonoBehaviour
                 Quaternion.Euler(90, 0, Random.Range(rotationDegrees.x, rotationDegrees.y)));
             if (enableEpicObjects && epicSpawnChance <= epicObjectsSpawnRate)
             {
+                var position = new Vector3(spawnPoints[spawnPoint].transform.position.x,
+                    spawnPoints[spawnPoint].transform.position.y, spawnPoints[spawnPoint].transform.position.z - 1);
                 epicSpawn = Instantiate(epicObjects[Random.Range(0, epicObjects.Length)],
-                    spawnPoints[spawnPoint].transform.position,
-                    Quaternion.Euler(180, 180, Random.Range(rotationDegrees.x, rotationDegrees.y)));
+                    position,
+                Quaternion.Euler(180, 180, Random.Range(rotationDegrees.x, rotationDegrees.y)));
             }
         }
         else
@@ -76,8 +79,10 @@ public class ObjectsSpawner : MonoBehaviour
 
             if (enableEpicObjects && epicSpawnChance <= epicObjectsSpawnRate)
             {
+                var position = new Vector3(spawnPoints[spawnPoint].transform.position.x,
+                    spawnPoints[spawnPoint].transform.position.y, spawnPoints[spawnPoint].transform.position.z - 1);
                 epicSpawn = Instantiate(epicObjects[Random.Range(0, epicObjects.Length)],
-                    spawnPoints[spawnPoint].transform.position,
+                    position,
                     Quaternion.Euler(180, 180, 0));
             }
         }
@@ -98,13 +103,11 @@ public class ObjectsSpawner : MonoBehaviour
     void SpawnObjects()
     {
         timeLeft -= Time.deltaTime;
-            if (timeLeft <= 0)
-            {
-                Spawn();
-                timeLeft = Random.Range(timeToSpawnObjects.x, timeToSpawnObjects.y);
-            }
-        
-
+        if (timeLeft <= 0)
+        {
+            Spawn();
+            timeLeft = Random.Range(timeToSpawnObjects.x, timeToSpawnObjects.y);
+        }
     }
 
 
@@ -112,6 +115,4 @@ public class ObjectsSpawner : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
-
-
 }
