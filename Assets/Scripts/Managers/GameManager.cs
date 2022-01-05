@@ -41,8 +41,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        scoreManager = ScoreManager.instance;
     }
 
     public void ChangeCamera()
@@ -94,11 +92,11 @@ public class GameManager : MonoBehaviour
             currentGameSpeed = maxGameSpeed;
         }
     }
-    
+
 
     public void GameWin()
     {
-        if (scoreManager.GetScore() >= scoreManager.scoreToWin)
+        if (ScoreManager.instanceScore.GetScore() >= ScoreManager.instanceScore.scoreToWin)
         {
             isGameWon = true;
         }

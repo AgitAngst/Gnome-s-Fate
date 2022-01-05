@@ -6,7 +6,7 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textSteps;
     [SerializeField] private TextMeshProUGUI textCash;
-    [HideInInspector]public static ScoreManager instance = null;
+    [HideInInspector]public static ScoreManager instanceScore = null;
     public float scoreToWin = 2500;
     [SerializeField] private int scoreCount = 0;
     [SerializeField] private int stepsCount = 0;
@@ -21,11 +21,11 @@ public class ScoreManager : MonoBehaviour
         SetScore(0);
         SetStep(0);
         character = GetComponentInParent<Character>();
-        if (instance == null)
+        if (instanceScore == null)
         {
-            instance = this;
+            instanceScore = this;
         }
-        else if (instance == this)
+        else if (instanceScore == this)
         {
             Destroy(gameObject);
         }

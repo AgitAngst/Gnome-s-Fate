@@ -27,7 +27,7 @@ public class CharacterEvents : MonoBehaviour
 
     void StepCount()
     {
-        ScoreManager.instance.SetStep(1);
+        ScoreManager.instanceScore.SetStep(1);
     }
 
 }

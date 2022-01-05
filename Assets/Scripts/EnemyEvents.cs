@@ -21,7 +21,7 @@ public class EnemyEvents : MonoBehaviour
             
         }
 
-        if (ScoreManager.instance.GetScore() >= scoreToReact)
+        if (ScoreManager.instanceScore.GetScore() >= scoreToReact)
         {
             animator = GetComponent<Animator>();
             animator.SetBool(animatorBoolName, true);

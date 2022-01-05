@@ -57,7 +57,6 @@ public class Character : MonoBehaviour
     private TweenerCore<float, float, FloatOptions> tweenerWeaponEmission;
 
     public CharacterEvents characterEvents;
-    private GameManager gameManager;
 
     public Transform attackPoint;
 
@@ -88,7 +87,6 @@ public class Character : MonoBehaviour
         positionSum = 0f;
         currentHp = maxHp;
         playerHp.text = currentHp.ToString();
-        gameManager = GameManager.instance;
         audioManager = FindObjectOfType<AudioManager>();
         rigidbodyController = GetComponent<RigidbodyController>();
         weaponLight = weapon.GetComponentInChildren<Light>();
@@ -130,19 +128,19 @@ public class Character : MonoBehaviour
         {
             ChangeMovementDependentOnCamera();
 
-            if (Input.GetKeyDown(gameManager.attackKey))
+            if (Input.GetKeyDown(GameManager.instance.attackKey))
             {
                 animator.SetTrigger(Attack1);
                 //attack is an event in attack animation
             }
 
-            if (Input.GetKeyDown(gameManager.startRunKey))
+            if (Input.GetKeyDown(GameManager.instance.startRunKey))
             {
                 if (characterStates == States.CharacterState.Idle)
                 {
                     characterStates = States.CharacterState.Running;
 
-                    characterSpeed = tmpSpeed += gameManager.scoreMultiplyer;
+                    characterSpeed = tmpSpeed += GameManager.instance.scoreMultiplyer;
                 }
             }
         }
@@ -151,9 +149,9 @@ public class Character : MonoBehaviour
 
     private void ChangeMovementDependentOnCamera()
     {
-        if (!gameManager.isCameraChanged)
+        if (!GameManager.instance.isCameraChanged)
         {
-            if (Input.GetKeyDown(gameManager.strafeLeftKey))
+            if (Input.GetKeyDown(GameManager.instance.strafeLeftKey))
             {
                 audioManager.PlaySound(0);
 
@@ -170,7 +168,7 @@ public class Character : MonoBehaviour
                 AnimatorLerp(-1);
             }
 
-            if (Input.GetKeyDown(gameManager.strafeRightKey))
+            if (Input.GetKeyDown(GameManager.instance.strafeRightKey))
             {
                 audioManager.PlaySound(0);
 
@@ -189,7 +187,7 @@ public class Character : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(gameManager.strafeRightKey))
+            if (Input.GetKeyDown(GameManager.instance.strafeRightKey))
             {
                 audioManager.PlaySound(0);
                 positionSum -= 3f;
@@ -205,7 +203,7 @@ public class Character : MonoBehaviour
                 AnimatorLerp(-1);
             }
 
-            if (Input.GetKeyDown(gameManager.strafeLeftKey))
+            if (Input.GetKeyDown(GameManager.instance.strafeLeftKey))
             {
                 audioManager.PlaySound(0);
                 positionSum += 3f;

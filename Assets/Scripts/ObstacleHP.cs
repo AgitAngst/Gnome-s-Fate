@@ -91,7 +91,7 @@ gameManager = GameManager.instance;
     private void Die()
     {
         var score = scorePerObject * gameManager.scoreMultiplyer;
-        ScoreManager.instance.SetScore(Mathf.RoundToInt(score));
+        ScoreManager.instanceScore.SetScore(Mathf.RoundToInt(score));
         if (obstacleType == States.ObstacleType.Enemy)
         {
             var o = gameObject;
