@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,7 +9,10 @@ public class GameManager : MonoBehaviour
     public float minGameSpeed = 1f;
     public float maxGameSpeed = 3f;
     public float currentGameSpeed = 1f;
-    [FormerlySerializedAs("speedAndScoreMultiplyer")] [FormerlySerializedAs("speedMultiplyer")] public float scoreMultiplyer;
+
+    [FormerlySerializedAs("speedAndScoreMultiplyer")] [FormerlySerializedAs("speedMultiplyer")]
+    public float scoreMultiplyer;
+
     public Character character;
     public KeyCode restartKey = KeyCode.R;
     public KeyCode strafeLeftKey = KeyCode.A;
@@ -22,8 +23,9 @@ public class GameManager : MonoBehaviour
 
     public Camera cameraBack;
     public Camera cameraFront;
+    private ScoreManager scoreManager;
+    [HideInInspector] public bool isCameraChanged = false;
 
-    [HideInInspector]public bool isCameraChanged = false;
     private void Awake()
     {
         InitializeManager();
@@ -40,14 +42,14 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-
+        scoreManager = ScoreManager.instance;
     }
-    
+
     public void ChangeCamera()
     {
         if (Input.GetKeyDown(cameraChangeKey))
         {
-            isCameraChanged =! isCameraChanged;
+            isCameraChanged = !isCameraChanged;
             if (!isCameraChanged)
             {
                 cameraBack.enabled = true;
@@ -60,6 +62,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
     private void InitializeManager()
     {
         currentGameSpeed = minGameSpeed;
@@ -73,6 +76,7 @@ public class GameManager : MonoBehaviour
             Application.LoadLevel(Application.loadedLevel);
 #pragma warning restore CS0618
         }
+
         GameWin();
         ChangeCamera();
     }
@@ -91,11 +95,17 @@ public class GameManager : MonoBehaviour
         }
     }
     
+
     public void GameWin()
     {
-        if (ScoreManager.instance.GetScore() >= ScoreManager.instance.scoreToWin)
+        if (scoreManager.GetScore() >= scoreManager.scoreToWin)
         {
             isGameWon = true;
         }
+    }
+
+    public void SmoothFloatToZero(float value)
+    {
+        DOTween.To(() => value, x => value = x, 0f, 2f);
     }
 }

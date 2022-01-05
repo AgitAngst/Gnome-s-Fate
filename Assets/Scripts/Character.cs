@@ -84,7 +84,7 @@ public class Character : MonoBehaviour
         positionSum = 0f;
         currentHp = maxHp;
         playerHp.text = currentHp.ToString();
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.instance;
         audioManager = FindObjectOfType<AudioManager>();
         rigidbodyController = GetComponent<RigidbodyController>();
         weaponLight = weapon.GetComponentInChildren<Light>();

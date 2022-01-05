@@ -12,7 +12,6 @@ public class ObstacleHp : MonoBehaviour
     private int currentHp;
     public float scorePerObject;
     private Character character;
-    private GameManager gameManager;
     private Animator animator;
     public float distanceToReact = 3f;
 
@@ -34,6 +33,7 @@ public class ObstacleHp : MonoBehaviour
     private Vector3 positionToJump;
     private static readonly int IsDancing = Animator.StringToHash("isDancing");
     private static readonly int IsFalling = Animator.StringToHash("isFalling");
+    private GameManager gameManager;
     public enum EnemyLineEnum
     {
         Left,
@@ -69,13 +69,12 @@ public class ObstacleHp : MonoBehaviour
         currentHp = maxHp;
         audioManager = FindObjectOfType<AudioManager>();
         character = FindObjectOfType<Character>();
-        gameManager = FindObjectOfType<GameManager>();
         if (gameObject.GetComponent<Animator>())
         {
             animator = gameObject.GetComponent<Animator>();
         }
-
-        //rigidbodyController = gameObject.GetComponent<RigidbodyController>();
+gameManager = GameManager.instance;
+//rigidbodyController = gameObject.GetComponent<RigidbodyController>();
         CheckEnemyLine();
     }
 
