@@ -34,7 +34,6 @@ public class ObstacleHp : MonoBehaviour
     private Vector3 positionToJump;
     private static readonly int IsDancing = Animator.StringToHash("isDancing");
     private static readonly int IsFalling = Animator.StringToHash("isFalling");
-
     public enum EnemyLineEnum
     {
         Left,
@@ -93,7 +92,7 @@ public class ObstacleHp : MonoBehaviour
     private void Die()
     {
         var score = scorePerObject * gameManager.scoreMultiplyer;
-        character.characterEvents.CashUpdate(Mathf.RoundToInt(score));
+        ScoreManager.instance.SetScore(Mathf.RoundToInt(score));
         if (obstacleType == States.ObstacleType.Enemy)
         {
             var o = gameObject;

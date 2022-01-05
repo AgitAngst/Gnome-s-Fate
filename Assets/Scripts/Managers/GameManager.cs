@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
+    public bool isGameWon = false;
     public static GameManager instance = null;
     public float minGameSpeed = 1f;
     public float maxGameSpeed = 3f;
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+
     }
     
     public void ChangeCamera()
@@ -71,7 +73,7 @@ public class GameManager : MonoBehaviour
             Application.LoadLevel(Application.loadedLevel);
 #pragma warning restore CS0618
         }
-        
+        GameWin();
         ChangeCamera();
     }
 
@@ -86,6 +88,14 @@ public class GameManager : MonoBehaviour
         else
         {
             currentGameSpeed = maxGameSpeed;
+        }
+    }
+    
+    public void GameWin()
+    {
+        if (ScoreManager.instance.GetScore() >= ScoreManager.instance.scoreToWin)
+        {
+            isGameWon = true;
         }
     }
 }

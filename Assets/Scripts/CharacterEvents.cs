@@ -1,19 +1,12 @@
-using TMPro;
 using UnityEngine;
 
 public class CharacterEvents : MonoBehaviour
 {
-    public TextMeshProUGUI textSteps;
-    public TextMeshProUGUI textCash;
-    private int stepsCount = 0;
-    private int cashCount = 0;
     private Character character;
     private AudioManager audioManager;
-
+    
     void Start()
     {
-        StepUpdate(0);
-        CashUpdate(0);
         character = GetComponentInParent<Character>();
         audioManager = FindObjectOfType<AudioManager>();
     }
@@ -21,10 +14,9 @@ public class CharacterEvents : MonoBehaviour
     void Update()
     {
     }
-
     public void Step()
     {
-        StepUpdate(1);
+        StepCount();
         audioManager.PlaySound(4);
     }
 
@@ -33,17 +25,9 @@ public class CharacterEvents : MonoBehaviour
         character.Attack();
     }
 
-    public int StepUpdate(int count)
+    void StepCount()
     {
-        stepsCount += count;
-        textSteps.text = stepsCount.ToString();
-        return count;
+        ScoreManager.instance.SetStep(1);
     }
 
-    public int CashUpdate(int cash)
-    {
-        cashCount += cash;
-        textCash.text = cashCount.ToString();
-        return cash;
-    }
 }
