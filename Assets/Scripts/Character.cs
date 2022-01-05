@@ -15,10 +15,9 @@ public class Character : MonoBehaviour
     private float xPosition;
     public float waitBeforeChangeSide = 0.5f;
     public float characterSpeed = 20f;
-    
-    [Range(0,1)]
-    [SerializeField] private float characterSpeedDecreasePercent = .1f;
-    
+
+    [Range(0, 1)] [SerializeField] private float characterSpeedDecreasePercent = .1f;
+
     private bool keyPressed = false;
     private Animator animator;
     private States state;
@@ -59,8 +58,13 @@ public class Character : MonoBehaviour
 
     public CharacterEvents characterEvents;
     private GameManager gameManager;
+
     public Transform attackPoint;
+
     public float attackRange = 0.5f;
+    public Transform attackPoint1;
+    public Transform attackPoint2;
+
     public LayerMask layerMask;
 
     public int attackDamage;
@@ -238,7 +242,10 @@ public class Character : MonoBehaviour
 
     public void Attack()
     {
-        Collider[] hitenemies = Physics.OverlapSphere(attackPoint.transform.position, attackRange, layerMask);
+        Collider[] hitenemies =
+            Physics.OverlapCapsule(attackPoint1.transform.position, attackPoint2.transform.position, attackRange,layerMask);
+
+        //      Collider[] hitenemies = Physics.OverlapSphere(attackPoint.transform.position, attackRange, layerMask);
         foreach (Collider enemy in hitenemies)
         {
             // Debug.Log("enemy" + enemy.name);
@@ -256,7 +263,7 @@ public class Character : MonoBehaviour
         tweenerWeapon = weaponLight.DOIntensity(weaponLightIntensity, weaponLightOnDuration)
             .OnComplete(() => { weaponLight.DOIntensity(0f, weaponLightOffDuration); });
 
-        tweenerWeaponEmission =  playerMaterial.DOFloat(10f, EmissiveIntensity, 10f)
+        tweenerWeaponEmission = playerMaterial.DOFloat(10f, EmissiveIntensity, 10f)
             .OnComplete(() => { playerMaterial.DOFloat(0f, EmissiveIntensity, 3); });
     }
 
@@ -271,7 +278,7 @@ public class Character : MonoBehaviour
         currentHp -= damage;
         reactionManager.ShakeCameraLight();
         playerHp.text = currentHp.ToString();
-    //    gameManager.ChangeSpeed(-1.5f);
+        //    gameManager.ChangeSpeed(-1.5f);
         if (currentHp >= 1)
         {
             animator.SetTrigger(Hurt);
@@ -327,8 +334,8 @@ public class Character : MonoBehaviour
             return;
         }
 
+     //   Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
         Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
-    }
 
-    
+    }
 }
